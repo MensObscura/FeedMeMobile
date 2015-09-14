@@ -7,16 +7,12 @@
     <!-- The LinearLayout consumes the entire space available using match_parent in both dimensions. -->
 
     <LinearLayout
+        android:id="@+id/linearMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <fragment
-            android:id="@+id/home"
-            android:name="com.example.thibault.feedme.fragments.HomeFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="gone" />
+
 
     </LinearLayout>
 

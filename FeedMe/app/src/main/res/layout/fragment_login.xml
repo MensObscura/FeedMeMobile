@@ -52,6 +52,7 @@ android:orientation="vertical">
         android:layout_gravity="center"
         android:hint="@string/password"
         android:padding="5dip"
+        android:inputType="textPassword"
         android:singleLine="true"
         android:textColor="#999999"
         android:textSize="14dip" />

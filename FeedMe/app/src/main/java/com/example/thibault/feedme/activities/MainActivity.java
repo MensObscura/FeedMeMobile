@@ -2,24 +2,32 @@ package com.example.thibault.feedme.activities;
 
 import java.util.ArrayList;
 
-import android.app.Fragment;
+
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.thibault.feedme.R;
+import com.example.thibault.feedme.fragments.BookAnnounceFragment;
+import com.example.thibault.feedme.fragments.HomeFragment;
+import com.example.thibault.feedme.fragments.PostAnnounceFragment;
+import com.example.thibault.feedme.fragments.ProfilFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,8 +47,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // ajout premier fragment dans le layout nommé "mainLayout"
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linearMain);
 
+        FragmentManager fragMan = getSupportFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
 
+        Fragment myFrag = new HomeFragment();
+        fragTransaction.add(mainLayout.getId(), myFrag, "fragment");
+        fragTransaction.commit();
 
         menuLayout = (DrawerLayout) findViewById(R.id.menu_layout);
         menuElementsList = (ListView) findViewById(R.id.menu_elements);
@@ -49,11 +64,10 @@ public class MainActivity extends AppCompatActivity {
         menuLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
-        // Get TimeZone List
+        // Liste des elements du menu
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
                 this, R.layout.element_menu);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
 
         menu.add(getString(R.string.profil));
         menu.add(getString(R.string.deposer));
@@ -113,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
         // ActionBarDrawerToggle will take care of this.
+
         if (menuToggle.onOptionsItemSelected(item)) {
-            Log.d("Main_activity","id : " +item.getItemId());
             return true;
         }
 
@@ -137,7 +151,67 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(int position) {
-        // update selected item and title, then close the drawer
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        Fragment current = manager.findFragmentByTag("fragment");
+
+        switch (position) {
+            // Item 'Profil' du menu
+            case 0:
+                // Remplacer le fragment courant par le fragment profil
+                ProfilFragment fProfil = new ProfilFragment();
+
+
+                if (current != null) {
+
+                    transaction.replace(current.getId(), fProfil, "fragment");
+
+                    transaction.commit();
+                }
+
+                Toast.makeText(this, "profil", Toast.LENGTH_SHORT).show();
+                break;
+            // Item 'Proposer une offre' du menu
+            case 1:
+                // Remplacer le fragment courant par le fragment profil
+                PostAnnounceFragment fPostAnnounce = new PostAnnounceFragment();
+
+
+                if (current != null) {
+
+                    transaction.replace(current.getId(), fPostAnnounce, "fragment");
+
+                    transaction.commit();
+                }
+                Toast.makeText(this, "proposer", Toast.LENGTH_SHORT).show();
+                break;
+            // Item 'Reserver une offre' du menu
+            case 2:
+                BookAnnounceFragment fBookAnnounce = new BookAnnounceFragment();
+
+
+                if (current != null) {
+
+                    transaction.replace(current.getId(), fBookAnnounce, "fragment");
+
+                    transaction.commit();
+                }
+                Toast.makeText(this, "reserver", Toast.LENGTH_LONG).show();
+                break;
+            // Item 'déconnexion' du menu
+            case 3:
+
+                Intent intent = new Intent(this, HomeLoginActivity.class);
+                startActivity(intent);
+                this.finish();
+                Toast.makeText(this, "deco", Toast.LENGTH_LONG).show();
+                break;
+            default:
+
+        }
+
         menuElementsList.setItemChecked(position, true);
         setTitle(menu.get(position));
         menuLayout.closeDrawer(menuElementsList);

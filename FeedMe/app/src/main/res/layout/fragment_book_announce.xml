@@ -1,184 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:padding="5dip"
-        android:text="@string/title"
-        android:textColor="#000000"
-        android:textSize="20dip"
-        android:textStyle="bold" />
-
-
-    <TextView
-        android:id="@+id/TVname_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:padding="5dip"
-        android:text="@string/name"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-
-    <TextView
-        android:id="@+id/TVaddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:padding="5dip"
-        android:text="@string/address"
-        android:textColor="#000000"
-        android:textSize="12dip" />
-
-    <TextView
-        android:id="@+id/TVprice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dip"
-        android:text="@string/Price"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-    <TextView
-        android:id="@+id/TVdate_hour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dip"
-        android:text="@string/date"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:text="@string/menu"
-            android:textColor="#000000"
-            android:textSize="14dip" />
-
-        <TextView
-            android:id="@+id/TVmenu"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="@string/menu"
+            android:layout_marginTop="30dp"
             android:padding="5dip"
-            android:singleLine="false"
-            android:textColor="#999999"
-            android:textSize="14dip" />
+            android:text="@string/title"
+            android:textColor="#000000"
+            android:textSize="20dip"
+            android:textStyle="bold" />
 
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/TVremain_place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dip"
-        android:text="@string/remainplace"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-    <TextView
-        android:id="@+id/TVtype"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dip"
-        android:text="@string/type"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-    <TextView
-        android:id="@+id/TVduration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dip"
-        android:text="@string/duration"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-    <TextView
-        android:id="@+id/TVpets"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dip"
-        android:text="@string/pet"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-
-    <TextView
-        android:id="@+id/TVnotes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dip"
-        android:text="@string/notes"
-        android:textColor="#000000"
-        android:textSize="14dip" />
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:text="@string/nombreinvite"
-            android:textColor="#000000"
-            android:textSize="14dip" />
-
-        <EditText
-            android:id="@+id/ETnbpeople_book"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/nombreinvite"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColor="#999999"
-            android:textSize="14dip" />
-
-        <Button
-            android:id="@+id/Bconfirm_book"
+            android:id="@+id/TVname_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:text="@string/validation" />
+            android:padding="5dip"
+            android:text="@string/name"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+
+        <TextView
+            android:id="@+id/TVaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:padding="5dip"
+            android:text="@string/address"
+            android:textColor="#000000"
+            android:textSize="12dip" />
+
+        <TextView
+            android:id="@+id/TVprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dip"
+            android:text="@string/Price"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <TextView
+            android:id="@+id/TVdate_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dip"
+            android:text="@string/date"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/menu"
+                android:textColor="#000000"
+                android:textSize="14dip" />
+
+            <TextView
+                android:id="@+id/TVmenu"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/menu"
+                android:padding="5dip"
+                android:singleLine="false"
+                android:textColor="#999999"
+                android:textSize="14dip" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/TVremain_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dip"
+            android:text="@string/remainplace"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <TextView
+            android:id="@+id/TVtype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dip"
+            android:text="@string/type"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <TextView
+            android:id="@+id/TVduration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dip"
+            android:text="@string/duration"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <TextView
+            android:id="@+id/TVpets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dip"
+            android:text="@string/pet"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+
+        <TextView
+            android:id="@+id/TVnotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dip"
+            android:text="@string/notes"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/nombreinvite"
+                android:textColor="#000000"
+                android:textSize="14dip" />
+
+            <EditText
+                android:id="@+id/ETnbpeople_book"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/nombreinvite"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:textColor="#999999"
+                android:textSize="14dip" />
+
+            <Button
+                android:id="@+id/Bconfirm_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="@string/validation" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-
-</LinearLayout>
+</ScrollView>

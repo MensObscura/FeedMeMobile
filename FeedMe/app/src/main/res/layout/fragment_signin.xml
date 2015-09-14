@@ -1,200 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:text="@string/lastname"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/ETlastname"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/lastname"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColor="#999999"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:text="@string/name"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/ETname"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/name"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColor="#999999"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:text="@string/password"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/ETpassword"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/password"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColor="#999999"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
-
-        <TextView
-
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:text="@string/confirmpassword"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/ETconfirmpassword"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/confirmpassword"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColor="#999999"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/LLMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:text="@string/email"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/ETmail"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/email"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColor="#999999"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
 
             <TextView
-                android:id="@+id/TBirthDate"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_gravity="center_vertical"
-                android:text="@string/birthdate"
+                android:padding="5dip"
+                android:text="@string/lastname"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/ETBirthDate"
+                android:id="@+id/ETlastname"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:focusable="false"
-                android:layout_gravity="center_vertical"
-                android:hint="@string/templateDate"
+                android:layout_gravity="center"
+                android:hint="@string/lastname"
                 android:padding="5dip"
                 android:singleLine="true"
                 android:textColor="#999999"
                 android:textSize="14sp" />
-
-
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/IBCalendar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/calendar" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/name"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/ETname"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/name"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/password"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/ETpassword"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/confirmpassword"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/ETconfirmpassword"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/confirmpassword"
+                android:inputType="textPassword"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/LLMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/email"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/ETmail"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/email"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/TBirthDate"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="@string/birthdate"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/ETBirthDate"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:focusable="false"
+                    android:hint="@string/templateDate"
+                    android:inputType="date"
+                    android:padding="5dip"
+                    android:singleLine="true"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/IBCalendar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/calendar" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="@string/validCGU" />
+
+        <Button
+            android:id="@+id/Bconfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/validation" />
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:text="@string/validCGU" />
-
-    <Button
-        android:id="@+id/Bconfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="@string/validation" />
-
-</LinearLayout>
+</ScrollView>
