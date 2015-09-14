@@ -1,16 +1,18 @@
 package com.example.thibault.feedme.fragments;
 
 
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,14 +34,18 @@ public class PostAnnounceFragment extends Fragment {
     private int month;
     private int year;
     private EditText etDate;
-
+    private Button bConfirm;
+    private Spinner sType;
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_post_announce, container, false);
+        View vPost = inflater.inflate(R.layout.fragment_post_announce, container, false);
 
-        final Spinner spinner = (Spinner) view.findViewById(R.id.Stype);
+        bConfirm = (Button) vPost.findViewById(R.id.Bconfirm);
+        sType = (Spinner) vPost.findViewById(R.id.Stype);
 
         ArrayAdapter<String> adapter;
         List<String> list;
@@ -54,7 +60,7 @@ public class PostAnnounceFragment extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        sType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -66,9 +72,26 @@ public class PostAnnounceFragment extends Fragment {
             }
         });
 
-        spinner.setAdapter(adapter);
+        sType.setAdapter(adapter);
 
+        bConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Toast.makeText(getActivity(), "Annonce Postée", Toast.LENGTH_SHORT).show();
+
+                manager = getActivity().getSupportFragmentManager();
+                transaction = manager.beginTransaction();
+                Fragment current = manager.findFragmentByTag("fragment");
+
+                // Remplacer le fragment courant par le fragment home
+                HomeFragment fHome = new HomeFragment();
+                transaction.replace(current.getId(), fHome, "fragment");
+
+                transaction.commit();
+
+            }
+        });
 
 
         //Date picker dialog
@@ -80,18 +103,18 @@ public class PostAnnounceFragment extends Fragment {
             }
         };
 
-        ibCalendar = (ImageButton) view.findViewById(R.id.IBCalendar);
+        ibCalendar = (ImageButton) vPost.findViewById(R.id.IBCalendar);
         calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
-        etDate = (EditText) view.findViewById(R.id.ETDate);
+        etDate = (EditText) vPost.findViewById(R.id.ETDate);
         ibCalendar.setOnClickListener(onDateEntryClick);
         etDate.setOnClickListener(onDateEntryClick);
 
 
         // Inflate the layout for this fragment
-        return view;
+        return vPost;
     }
 
     protected void CreateDialog(int id) {
