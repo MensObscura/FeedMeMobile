@@ -252,21 +252,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
         Fragment current = manager.findFragmentByTag("fragment");
 
 
-        if (current != null && !current.getClass().equals(HomeFragment.class)) {
+        if (current != null && !current.getClass().equals(HomeFragment.class) && !current.getClass().equals(ListAnnounceFragment.class) ) {
 
 
-            // Remplacer le fragment courant par le fragment partager
+            // Remplacer le fragment courant par le fragment Home
             HomeFragment fHome = new HomeFragment();
             transaction.replace(current.getId(), fHome, "fragment");
 
             transaction.commit();
-            Log.d("mainActivity", "in");
-        }else {
-            Log.d("mainActivity","out");
+            Log.d("mainActivity", "inHome");
+        }else if (current != null && !current.getClass().equals(HomeFragment.class)) {
+
+
+            // Remplacer le fragment courant par le fragment List
+            ListAnnounceFragment fList = new ListAnnounceFragment();
+            transaction.replace(current.getId(), fList, "fragment");
+
+            transaction.commit();
+            Log.d("mainActivity", "inList");}
+        else {
+            Log.d("mainActivity", "out");
             super.onBackPressed();
         }
     }
@@ -282,19 +292,28 @@ public class MainActivity extends AppCompatActivity {
             Fragment current = manager.findFragmentByTag("fragment");
 
 
-            if (current != null && !current.getClass().equals(HomeFragment.class)) {
+            if (current != null && !current.getClass().equals(HomeFragment.class) && !current.getClass().equals(BookAnnounceFragment.class)) {
 
-                manager = getSupportFragmentManager();
-                transaction = manager.beginTransaction();
-                // Remplacer le fragment courant par le fragment partager
+
+                // Remplacer le fragment courant par le fragment home
                 HomeFragment fHome = new HomeFragment();
                 transaction.replace(current.getId(), fHome, "fragment");
 
                 transaction.commit();
 
-                Log.d("mainActivity", "in");
+                Log.d("mainActivity", "inHome");
                 return true;
+            } else if (current != null && !current.getClass().equals(HomeFragment.class)) {
+
+
+                // Remplacer le fragment courant par le fragment List
+                ListAnnounceFragment fList = new ListAnnounceFragment();
+                transaction.replace(current.getId(), fList, "fragment");
+
+                transaction.commit();
+                Log.d("mainActivity", "inList");
             }
+
             Log.d("mainActivity","out");
         }
         return super.onKeyDown(keyCode, event);

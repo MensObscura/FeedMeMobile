@@ -1,6 +1,10 @@
 package com.example.thibault.feedme.fragments;
 
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -13,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.thibault.feedme.R;
+import com.example.thibault.feedme.adapters.ListAnnounceAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,12 +37,16 @@ public class ListAnnounceFragment extends Fragment {
 
         announces = (GridView) fList.findViewById(R.id.gridAnnounce);
 
+        announces.setAdapter(new ListAnnounceAdapter(getActivity()));
+
 
         announces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
                                              @Override
                                              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
+                                                 manager = getActivity().getSupportFragmentManager();
+                                                 transaction = manager.beginTransaction();
                                                  Fragment current = manager.findFragmentByTag("fragment");
 
 
@@ -56,6 +65,7 @@ public class ListAnnounceFragment extends Fragment {
 
         return fList;
     }
+
 
 
 }
