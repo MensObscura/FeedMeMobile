@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Toast.makeText(this, "proposer", Toast.LENGTH_SHORT).show();
                 break;
-            // Item 'Reserver une offre' du menu
+            // Item 'Lister les offres' du menu
             case 2:
                 ListAnnounceFragment fListAnnounce = new ListAnnounceFragment();
 

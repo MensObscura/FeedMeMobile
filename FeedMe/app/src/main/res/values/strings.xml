@@ -16,7 +16,7 @@
     <string name="signin">Sign in</string>
     <string name="profil">profil</string>
     <string name="logout">Deconnexion</string>
-    <string name="reserver">Réserver un couvert</string>
+    <string name="reserver">Rechercher un repas</string>
     <string name="deposer">Proposer un repas</string>
     <string name="lastname">Nom</string>
     <string name="name">Prénom</string>
