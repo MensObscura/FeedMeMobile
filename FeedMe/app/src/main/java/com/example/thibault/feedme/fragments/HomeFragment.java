@@ -3,6 +3,8 @@ package com.example.thibault.feedme.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +47,42 @@ public class HomeFragment extends Fragment {
     }
 
     private void launchFromMeal() {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
 
+        Fragment current = manager.findFragmentByTag("fragment");
+
+
+                // Remplacer le fragment courant par le fragment partager
+                PostAnnounceFragment fPost = new PostAnnounceFragment();
+
+
+                if (current != null) {
+
+                    transaction.replace(current.getId(), fPost, "fragment");
+
+                    transaction.commit();
+                }
 
 
     }
     private void launchListMeal() {
 
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
 
+        Fragment current = manager.findFragmentByTag("fragment");
+
+
+        // Remplacer le fragment courant par le fragment partager
+        ListAnnounceFragment fList = new ListAnnounceFragment();
+
+
+        if (current != null) {
+
+            transaction.replace(current.getId(), fList, "fragment");
+
+            transaction.commit();
+        }
     }
 }

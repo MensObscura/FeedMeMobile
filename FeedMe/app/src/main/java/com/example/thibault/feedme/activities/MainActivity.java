@@ -13,6 +13,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 import com.example.thibault.feedme.R;
 import com.example.thibault.feedme.fragments.BookAnnounceFragment;
 import com.example.thibault.feedme.fragments.HomeFragment;
+import com.example.thibault.feedme.fragments.ListAnnounceFragment;
 import com.example.thibault.feedme.fragments.PostAnnounceFragment;
 import com.example.thibault.feedme.fragments.ProfilFragment;
 
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence menuTitle = "Menu";
     private CharSequence activityTitle = "FeedMe";
 
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
+
     ArrayList<String> menu = new ArrayList<String>();
 
 
@@ -50,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         // ajout premier fragment dans le layout nommé "mainLayout"
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linearMain);
 
-        FragmentManager fragMan = getSupportFragmentManager();
-        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
 
         Fragment myFrag = new HomeFragment();
-        fragTransaction.add(mainLayout.getId(), myFrag, "fragment");
-        fragTransaction.commit();
+        transaction.add(mainLayout.getId(), myFrag, "fragment");
+        transaction.commit();
 
         menuLayout = (DrawerLayout) findViewById(R.id.menu_layout);
         menuElementsList = (ListView) findViewById(R.id.menu_elements);
@@ -152,9 +158,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectItem(int position) {
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
         Fragment current = manager.findFragmentByTag("fragment");
 
         switch (position) {
@@ -189,12 +194,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             // Item 'Reserver une offre' du menu
             case 2:
-                BookAnnounceFragment fBookAnnounce = new BookAnnounceFragment();
+                ListAnnounceFragment fListAnnounce = new ListAnnounceFragment();
 
 
                 if (current != null) {
 
-                    transaction.replace(current.getId(), fBookAnnounce, "fragment");
+                    transaction.replace(current.getId(), fListAnnounce, "fragment");
 
                     transaction.commit();
                 }
@@ -243,4 +248,55 @@ public class MainActivity extends AppCompatActivity {
         menuToggle.onConfigurationChanged(newConfig);
     }
 
+    // 2.0 and above
+    @Override
+    public void onBackPressed() {
+
+
+        Fragment current = manager.findFragmentByTag("fragment");
+
+
+        if (current != null && !current.getClass().equals(HomeFragment.class)) {
+
+
+            // Remplacer le fragment courant par le fragment partager
+            HomeFragment fHome = new HomeFragment();
+            transaction.replace(current.getId(), fHome, "fragment");
+
+            transaction.commit();
+            Log.d("mainActivity", "in");
+        }else {
+            Log.d("mainActivity","out");
+            super.onBackPressed();
+        }
+    }
+
+
+    // Before 2.0
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            manager = getSupportFragmentManager();
+            transaction = manager.beginTransaction();
+            Fragment current = manager.findFragmentByTag("fragment");
+
+
+            if (current != null && !current.getClass().equals(HomeFragment.class)) {
+
+                manager = getSupportFragmentManager();
+                transaction = manager.beginTransaction();
+                // Remplacer le fragment courant par le fragment partager
+                HomeFragment fHome = new HomeFragment();
+                transaction.replace(current.getId(), fHome, "fragment");
+
+                transaction.commit();
+
+                Log.d("mainActivity", "in");
+                return true;
+            }
+            Log.d("mainActivity","out");
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

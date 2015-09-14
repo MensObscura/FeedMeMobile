@@ -69,4 +69,6 @@ public class HomeLoginActivity extends FragmentActivity implements MyOnClickList
         transaction.replace(lNum,fragment);
         transaction.commit();
     }
+
+
 }
