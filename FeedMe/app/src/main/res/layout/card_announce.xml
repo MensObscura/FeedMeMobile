@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/TVcard_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:padding="5dip"
+        android:text="@string/title"
+        android:textColor="#000000"
+        android:textSize="14dip" />
+
+    <TextView
+        android:id="@+id/TVcard_ville"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:padding="5dip"
+        android:text="@string/address"
+        android:textColor="#000000"
+        android:textSize="14dip" />
+
+    <TextView
+        android:id="@+id/TVcard_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:padding="5dip"
+        android:text="@string/type"
+        android:textColor="#000000"
+        android:textSize="14dip" />
+
+    <TextView
+        android:id="@+id/TVcard_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:padding="5dip"
+        android:text="@string/Price"
+        android:textColor="#000000"
+        android:textSize="14dip" />
+
+    <TextView
+        android:id="@+id/TVcard_remain_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:padding="5dip"
+        android:text="@string/remainplace"
+        android:textColor="#000000"
+        android:textSize="14dip" />
+</LinearLayout>

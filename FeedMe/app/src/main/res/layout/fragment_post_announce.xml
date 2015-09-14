@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/title"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETtitle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/title"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/nombreinvite"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETnbpeople"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/nombreinvite"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/Price"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETprice"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/Price"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/address"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETaddress"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/address"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/date"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <DatePicker
+            android:id="@+id/DPdate"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:endYear="2100"
+            android:startYear="1900"></DatePicker>
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/menu"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETmenu"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/menu"
+            android:padding="5dip"
+            android:singleLine="false"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/type"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <Spinner
+            android:id="@+id/Stype"
+            android:layout_width="100dp"
+            android:layout_height="30dp" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/duration"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETduration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/duration"
+            android:padding="5dip"
+            android:singleLine="false"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/agebracket"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETageback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/age"
+            android:padding="5dip"
+            android:singleLine="false"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/notes"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/ETnotes"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/notes"
+            android:padding="5dip"
+            android:singleLine="false"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:id="@+id/CBpets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pet" />
+
+        <Button
+            android:id="@+id/Bconfirm"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/validation" />
+    </LinearLayout>
+
+
+</LinearLayout>

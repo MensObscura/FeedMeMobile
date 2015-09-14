@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/lastname"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <TextView
+            android:id="@+id/TVlastname"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/lastname"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/name"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <TextView
+            android:id="@+id/TVname"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/name"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="5dip"
+            android:text="@string/email"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/email"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColor="#999999"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="5dip"
+            android:text="@string/age"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+        <TextView
+            android:id="@+id/TVage"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="@string/age"
+            android:textColor="#000000"
+            android:textSize="14dip" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
