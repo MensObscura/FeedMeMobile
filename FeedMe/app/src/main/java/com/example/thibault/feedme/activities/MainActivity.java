@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     transaction.commit();
                 }
 
-                Toast.makeText(this, "profil", Toast.LENGTH_SHORT).show();
+
                 break;
             // Item 'Proposer une offre' du menu
             case 1:
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
                     transaction.commit();
                 }
-                Toast.makeText(this, "proposer", Toast.LENGTH_SHORT).show();
+
                 break;
             // Item 'Lister les offres' du menu
             case 2:
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
                     transaction.commit();
                 }
-                Toast.makeText(this, "reserver", Toast.LENGTH_LONG).show();
+
                 break;
             // Item 'déconnexion' du menu
             case 3:
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, HomeLoginActivity.class);
                 startActivity(intent);
                 this.finish();
-                Toast.makeText(this, "deco", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Bybye", Toast.LENGTH_LONG).show();
                 break;
             default:
 
@@ -265,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(current.getId(), fHome, "fragment");
 
             transaction.commit();
-            Log.d("mainActivity", "inHome");
         }else if (current != null && !current.getClass().equals(HomeFragment.class)) {
 
 
@@ -274,9 +273,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(current.getId(), fList, "fragment");
 
             transaction.commit();
-            Log.d("mainActivity", "inList");}
-        else {
-            Log.d("mainActivity", "out");
+        }else {
             super.onBackPressed();
         }
     }
@@ -301,7 +298,6 @@ public class MainActivity extends AppCompatActivity {
 
                 transaction.commit();
 
-                Log.d("mainActivity", "inHome");
                 return true;
             } else if (current != null && !current.getClass().equals(HomeFragment.class)) {
 
@@ -311,10 +307,10 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(current.getId(), fList, "fragment");
 
                 transaction.commit();
-                Log.d("mainActivity", "inList");
+
             }
 
-            Log.d("mainActivity","out");
+
         }
         return super.onKeyDown(keyCode, event);
     }

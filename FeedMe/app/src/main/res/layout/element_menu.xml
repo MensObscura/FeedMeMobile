@@ -2,8 +2,9 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_time_zone_name"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:gravity="center_vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
+    android:background="@drawable/item_menu_background"
     android:textColor="#fff"/>
