@@ -89,6 +89,7 @@ public class PostAnnounceFragment extends Fragment {
                 transaction.replace(current.getId(), fHome, "fragment");
 
                 transaction.commit();
+                getActivity().setTitle(getString(R.string.app_name));
 
             }
         });

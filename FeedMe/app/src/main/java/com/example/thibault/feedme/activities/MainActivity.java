@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         menu.add(getString(R.string.profil));
         menu.add(getString(R.string.deposer));
-        menu.add(getString(R.string.reserver));
+        menu.add(getString(R.string.rechercher));
         menu.add(getString(R.string.logout));
         for (int i = 0; i < menu.size(); i++) {
             adapter.add(menu.get(i));
@@ -265,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(current.getId(), fHome, "fragment");
 
             transaction.commit();
+            setTitle(getString(R.string.app_name));
         }else if (current != null && !current.getClass().equals(HomeFragment.class)) {
 
 
@@ -273,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(current.getId(), fList, "fragment");
 
             transaction.commit();
+            setTitle(getString(R.string.rechercher));
         }else {
             super.onBackPressed();
         }
@@ -297,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(current.getId(), fHome, "fragment");
 
                 transaction.commit();
+                setTitle(getString(R.string.app_name));
 
                 return true;
             } else if (current != null && !current.getClass().equals(HomeFragment.class)) {
@@ -305,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
                 // Remplacer le fragment courant par le fragment List
                 ListAnnounceFragment fList = new ListAnnounceFragment();
                 transaction.replace(current.getId(), fList, "fragment");
-
+                setTitle(getString(R.string.rechercher));
                 transaction.commit();
 
             }

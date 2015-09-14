@@ -58,6 +58,7 @@ public class ListAnnounceFragment extends Fragment {
                                                      transaction.replace(current.getId(), fBook, "fragment");
 
                                                      transaction.commit();
+                                                     getActivity().setTitle(getString(R.string.reservation));
                                                  }
                                              }
                                          }

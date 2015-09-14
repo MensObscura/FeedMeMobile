@@ -16,7 +16,8 @@
     <string name="signin">Sign in</string>
     <string name="profil">profil</string>
     <string name="logout">Deconnexion</string>
-    <string name="reserver">Rechercher un repas</string>
+    <string name="rechercher">Rechercher un repas</string>
+    <string name="reservation">Reserver un couvert</string>
     <string name="deposer">Proposer un repas</string>
     <string name="lastname">Nom</string>
     <string name="name">Prénom</string>
@@ -48,4 +49,5 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home_login">Connection</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

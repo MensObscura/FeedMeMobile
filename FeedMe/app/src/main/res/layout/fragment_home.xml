@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:singleLine="true"
-            android:text="@string/reserver" />
+            android:text="@string/rechercher" />
     </LinearLayout>
 
 </GridLayout>

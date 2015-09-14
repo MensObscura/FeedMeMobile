@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
                     transaction.replace(current.getId(), fPost, "fragment");
 
                     transaction.commit();
+                    getActivity().setTitle(getString(R.string.deposer));
                 }
 
 
@@ -83,6 +84,7 @@ public class HomeFragment extends Fragment {
             transaction.replace(current.getId(), fList, "fragment");
 
             transaction.commit();
+            getActivity().setTitle(getString(R.string.rechercher));
         }
     }
 }
