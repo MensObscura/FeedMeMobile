@@ -35,6 +35,8 @@ public class ListAnnounceAdapter extends BaseAdapter {
         announces.add("Escargot en sauce");
         announces.add("Rognons à la biere");
         announces.add("Foie de morue");
+        announces.add("Jambon à la thibaud");
+        announces.add("Canard laqué Chino-Algérien");
     }
 
     // Total number of things contained within the adapter

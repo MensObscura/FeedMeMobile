@@ -11,6 +11,7 @@
             android:layout_height="match_parent"
             android:columnWidth="100dp"
             android:gravity="center"
+            android:background="@android:color/white"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth">
 
