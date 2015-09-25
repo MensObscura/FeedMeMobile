@@ -36,9 +36,12 @@ public class Offre {
     Integer  ageMin;
     @DatabaseField
     Integer ageMax;
+    @DatabaseField
+    boolean animaux;
     @DatabaseField(foreign = true)
     Integer typeCuisine;
-
+    @DatabaseField(foreign = true)
+    Integer idUser;
 
 
 
@@ -48,7 +51,7 @@ public class Offre {
         // needed by ormlite
     }
 
-    public Offre(Date dateCreation, String titre, Integer prix,Integer nbPrsn,Time durée, Timestamp dateRepas, Integer idAdress, String notes, String menu,Integer ageMin, Integer ageMax, Integer typeCuisine) {
+    public Offre(Date dateCreation, String titre, Integer prix,Integer nbPrsn,Time durée, Timestamp dateRepas, Integer idAdress, String notes, String menu,Integer ageMin, Integer ageMax,boolean animaux, Integer typeCuisine, Integer idUser) {
 
         this.dateCreation =dateCreation;
         this.titre=titre;
@@ -61,7 +64,9 @@ public class Offre {
         this.menu=menu;
         this.ageMin=ageMin;
         this.ageMax=ageMax;
+        this.animaux=animaux;
         this.typeCuisine=typeCuisine;
+        this.idUser=idUser;
     }
 
     @Override
@@ -80,6 +85,7 @@ public class Offre {
         sb.append(", ").append("age minimum : ").append(this.ageMin);
         sb.append(", ").append("age maximum : ").append(this.ageMax);
         sb.append(", ").append("Type de cuisine").append(this.typeCuisine);
+        sb.append(", ").append("Initiateur").append(this.idUser);
         return sb.toString();
     }
 }

@@ -12,8 +12,6 @@ public class Reservation {
     @DatabaseField(foreign = true, id = true)
     int offreId;
     @DatabaseField(foreign = true, id = true)
-    int hoteId;
-    @DatabaseField(foreign = true, id = true)
     int conId;
     @DatabaseField
     String etat;
@@ -25,10 +23,9 @@ public class Reservation {
         // needed by ormlite
     }
 
-    Reservation(int offreId, int hoteId,int conId, String etat, Timestamp date) {
+    Reservation(int offreId,int conId, String etat, Timestamp date) {
 
         this.offreId = offreId;
-        this.hoteId=hoteId;
         this.conId=conId;
         this.etat=etat;
         this.date=date;
@@ -38,7 +35,6 @@ public class Reservation {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("offre ID = ").append(this.offreId);
-        sb.append(", ").append("hote ID : ").append(this.hoteId);
         sb.append(", ").append("con ID : ").append(this.conId);
         sb.append(", ").append("etat : ").append(this.etat);
         sb.append(", ").append("date : ").append(this.date);

@@ -17,17 +17,19 @@ public class Particulier {
     String prenom;
     @DatabaseField
     Date dateNaissance;
-
+    @DatabaseField(foreign = true)
+    Integer idUser;
 
 
     Particulier() {
         // needed by ormlite
     }
 
-    Particulier(String prenom, Date dateNaissance){
+    Particulier(String prenom, Date dateNaissance, Integer idUser){
 
         this.prenom=prenom;
         this.dateNaissance=dateNaissance;
+        this.idUser=idUser;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class Particulier {
         sb.append("id=").append(this.id);
         sb.append(", ").append("Prénom : ").append(this.prenom);
         sb.append(", ").append("date de naissance : ").append(this.dateNaissance);
-
+        sb.append(", ").append("utilisateur").append(this.idUser);
         return sb.toString();
     }
 }

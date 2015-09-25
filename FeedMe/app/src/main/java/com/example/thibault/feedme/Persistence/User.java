@@ -15,8 +15,6 @@ public class User {
     @DatabaseField
     String nom;
     @DatabaseField
-    String password;
-    @DatabaseField
     String email;
 
 
@@ -24,10 +22,9 @@ public class User {
         // needed by ormlite
     }
 
-    User(String nom, String password, String email){
+    User(String nom, String email){
 
         this.nom =nom;
-        this.password=password;
         this.email=email;
     }
 
@@ -36,7 +33,6 @@ public class User {
         StringBuilder sb = new StringBuilder();
         sb.append("id=").append(this.id);
         sb.append(", ").append("Nom : ").append(this.nom);
-        sb.append(", ").append("password : ").append("*******");
         sb.append(", ").append("email : ").append(this.email);
 
         return sb.toString();
