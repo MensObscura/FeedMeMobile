@@ -2,8 +2,6 @@ package com.example.thibault.feedme.Persistence;
 
 import com.j256.ormlite.field.DatabaseField;
 
-import java.util.Date;
-
 /**
  * Created by Thibault on 19/09/2015.
  */
@@ -22,10 +20,10 @@ public class User {
         // needed by ormlite
     }
 
-    User(String nom, String email){
+    public User(String nom, String email) {
 
-        this.nom =nom;
-        this.email=email;
+        this.nom = nom;
+        this.email = email;
     }
 
     @Override

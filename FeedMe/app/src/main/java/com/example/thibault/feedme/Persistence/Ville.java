@@ -17,16 +17,15 @@ public class Ville {
     int pays;
 
 
-
     Ville() {
         // needed by ormlite
     }
 
-    Ville(String nom,String codePostal, int pays){
+    public Ville(String nom, String codePostal, int pays) {
 
-        this.nom=nom;
-        this.codePostal=codePostal;
-        this.pays=pays;
+        this.nom = nom;
+        this.codePostal = codePostal;
+        this.pays = pays;
     }
 
     @Override

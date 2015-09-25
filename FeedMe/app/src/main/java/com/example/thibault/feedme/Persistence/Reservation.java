@@ -23,12 +23,12 @@ public class Reservation {
         // needed by ormlite
     }
 
-    Reservation(int offreId,int conId, String etat, Timestamp date) {
+    public Reservation(int offreId, int conId, String etat, Timestamp date) {
 
         this.offreId = offreId;
-        this.conId=conId;
-        this.etat=etat;
-        this.date=date;
+        this.conId = conId;
+        this.etat = etat;
+        this.date = date;
     }
 
     @Override

@@ -16,15 +16,14 @@ public class Pays {
     String nom;
 
 
-
     Pays() {
         // needed by ormlite
     }
 
-    Pays(String code, String nom){
+    public Pays(String code, String nom) {
 
-        this.code=code;
-        this.nom=nom;
+        this.code = code;
+        this.nom = nom;
     }
 
     @Override

@@ -16,12 +16,11 @@ public class Authentification {
     int idUser;
 
 
-
     Authentification() {
         // needed by ormlite
     }
 
-    Authentification(String password, int idRole, int idUser) {
+    public Authentification(String password, int idRole, int idUser) {
 
         this.password = password;
         this.idRole = idRole;

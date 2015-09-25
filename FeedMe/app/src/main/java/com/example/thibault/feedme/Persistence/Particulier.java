@@ -25,11 +25,11 @@ public class Particulier {
         // needed by ormlite
     }
 
-    Particulier(String prenom, Date dateNaissance, Integer idUser){
+    public Particulier(String prenom, Date dateNaissance, Integer idUser) {
 
-        this.prenom=prenom;
-        this.dateNaissance=dateNaissance;
-        this.idUser=idUser;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.idUser = idUser;
     }
 
     @Override

@@ -2,8 +2,6 @@ package com.example.thibault.feedme.Persistence;
 
 import com.j256.ormlite.field.DatabaseField;
 
-import java.util.Date;
-
 /**
  * Created by Thibault on 19/09/2015.
  */
@@ -17,15 +15,13 @@ public class TypeCuisine {
     String typeCuisine;
 
 
-
-
     TypeCuisine() {
         // needed by ormlite
     }
 
-    TypeCuisine(String typeCuisine){
+    public TypeCuisine(String typeCuisine) {
 
-        this.typeCuisine=typeCuisine;
+        this.typeCuisine = typeCuisine;
     }
 
     @Override

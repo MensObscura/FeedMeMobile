@@ -8,8 +8,6 @@ import com.j256.ormlite.field.DatabaseField;
 public class Role {
 
 
-
-
     @DatabaseField(generatedId = true)
     int id;
     @DatabaseField
@@ -20,7 +18,7 @@ public class Role {
         // needed by ormlite
     }
 
-    Role(String role) {
+    public Role(String role) {
 
         this.role = role;
     }

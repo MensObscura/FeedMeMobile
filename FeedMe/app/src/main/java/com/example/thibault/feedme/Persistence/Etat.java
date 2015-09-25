@@ -8,9 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 public class Etat {
 
 
-
-
-    @DatabaseField(id= true)
+    @DatabaseField(id = true)
     String code;
     @DatabaseField
     String nom;
@@ -20,7 +18,7 @@ public class Etat {
         // needed by ormlite
     }
 
-    Etat(String code, String nom) {
+    public Etat(String code, String nom) {
 
         this.code = code;
         this.nom = nom;
