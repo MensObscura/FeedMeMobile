@@ -36,6 +36,10 @@
     <string name="remainplace">Nombre de places Restantes</string>
     <string name="Price">Prix</string>
     <string name="address">Adresse</string>
+    <string name="street">Voie</string>
+    <string name="city">Ville</string>
+    <string name="codepostal">Code Postal</string>
+    <string name="country">Pays</string>
     <string name="date">Date</string>
     <string name="menu">Menu</string>
     <string name="duration">Durée</string>
