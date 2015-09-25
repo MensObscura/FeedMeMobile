@@ -91,7 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
 
@@ -102,17 +103,114 @@
                 android:textColor="#000000"
                 android:textSize="14dip" />
 
-            <EditText
-                android:id="@+id/ETaddress"
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="@string/address"
-                android:padding="5dip"
-                android:singleLine="true"
-                android:textColor="#999999"
-                android:textSize="14dip" />
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip"
+                    android:text="@string/street"
+                    android:textColor="#000000"
+                    android:textSize="14dip" />
+
+                <EditText
+                    android:id="@+id/ETstreet"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/street"
+                    android:padding="5dip"
+                    android:singleLine="true"
+                    android:textColor="#999999"
+                    android:textSize="14dip" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip"
+                    android:text="@string/city"
+                    android:textColor="#000000"
+                    android:textSize="14dip" />
+
+                <EditText
+                    android:id="@+id/ETcity"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/city"
+                    android:padding="5dip"
+                    android:singleLine="true"
+                    android:textColor="#999999"
+                    android:textSize="14dip" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip"
+                    android:text="@string/codepostal"
+                    android:textColor="#000000"
+                    android:textSize="14dip" />
+
+                <EditText
+                    android:id="@+id/ETcp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/codepostal"
+                    android:padding="5dip"
+                    android:singleLine="true"
+                    android:textColor="#999999"
+                    android:textSize="14dip" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip"
+                    android:text="@string/country"
+                    android:textColor="#000000"
+                    android:textSize="14dip" />
+
+                <EditText
+                    android:id="@+id/ETaddress"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/country"
+                    android:padding="5dip"
+                    android:singleLine="true"
+                    android:textColor="#999999"
+                    android:textSize="14dip" />
+            </LinearLayout>
         </LinearLayout>
+
+
+
 
         <LinearLayout
             android:layout_width="wrap_content"
