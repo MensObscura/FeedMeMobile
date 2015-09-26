@@ -9,7 +9,7 @@ public class Role {
 
 
     @DatabaseField(generatedId = true)
-    int id;
+    long id;
     @DatabaseField
     String role;
 

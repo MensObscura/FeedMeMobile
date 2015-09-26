@@ -1,0 +1,222 @@
+#
+# generated on 2015/09/26 03:54:08
+#
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Adresse
+tableName=adresse
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=voie
+# --field-end--
+# --field-start--
+fieldName=ville
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Authentification
+tableName=authentification
+# --table-fields-start--
+# --field-start--
+fieldName=password
+# --field-end--
+# --field-start--
+fieldName=idRole
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=idUser
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Offre
+tableName=offre
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=dateCreation
+# --field-end--
+# --field-start--
+fieldName=titre
+# --field-end--
+# --field-start--
+fieldName=prix
+# --field-end--
+# --field-start--
+fieldName=nbPrsn
+# --field-end--
+# --field-start--
+fieldName=durée
+# --field-end--
+# --field-start--
+fieldName=dateRepas
+# --field-end--
+# --field-start--
+fieldName=idAdress
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=notes
+# --field-end--
+# --field-start--
+fieldName=menu
+# --field-end--
+# --field-start--
+fieldName=ageMin
+# --field-end--
+# --field-start--
+fieldName=ageMax
+# --field-end--
+# --field-start--
+fieldName=animaux
+# --field-end--
+# --field-start--
+fieldName=typeCuisine
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=idUser
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Particulier
+tableName=particulier
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=prenom
+# --field-end--
+# --field-start--
+fieldName=dateNaissance
+# --field-end--
+# --field-start--
+fieldName=idUser
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Pays
+tableName=pays
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=code
+# --field-end--
+# --field-start--
+fieldName=nom
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Reservation
+tableName=reservation
+# --table-fields-start--
+# --field-start--
+fieldName=offreId
+id=true
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=conId
+id=true
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=etat
+# --field-end--
+# --field-start--
+fieldName=date
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Role
+tableName=role
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=role
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.TypeCuisine
+tableName=typecuisine
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=typeCuisine
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.User
+tableName=user
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nom
+# --field-end--
+# --field-start--
+fieldName=email
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.thibault.feedme.Persistence.Ville
+tableName=ville
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nom
+# --field-end--
+# --field-start--
+fieldName=codePostal
+# --field-end--
+# --field-start--
+fieldName=pays
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

@@ -5,4 +5,4 @@
 /build
 /captures
 *.log
-
+ormlite_config.txt

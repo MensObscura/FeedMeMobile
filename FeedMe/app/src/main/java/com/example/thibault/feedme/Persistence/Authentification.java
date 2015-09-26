@@ -11,16 +11,16 @@ public class Authentification {
     @DatabaseField
     String password;
     @DatabaseField(foreign = true)
-    int idRole;
+    long idRole;
     @DatabaseField(foreign = true)
-    int idUser;
+    long idUser;
 
 
     Authentification() {
         // needed by ormlite
     }
 
-    public Authentification(String password, int idRole, int idUser) {
+    public Authentification(String password, long idRole, long idUser) {
 
         this.password = password;
         this.idRole = idRole;

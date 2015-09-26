@@ -2,6 +2,7 @@ package com.example.thibault.feedme.databaseHelpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.thibault.feedme.Persistence.Adresse;
 import com.example.thibault.feedme.Persistence.Authentification;
@@ -59,22 +60,45 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
             /**
              * creates the database tables
              */
-            TableUtils.createTable(connectionSource, Adresse.class);
-            TableUtils.createTable(connectionSource, Authentification.class);
-            TableUtils.createTable(connectionSource, Offre.class);
-            TableUtils.createTable(connectionSource, Particulier.class);
             TableUtils.createTable(connectionSource, Pays.class);
-            TableUtils.createTable(connectionSource, Reservation.class);
             TableUtils.createTable(connectionSource, Role.class);
             TableUtils.createTable(connectionSource, TypeCuisine.class);
             TableUtils.createTable(connectionSource, User.class);
             TableUtils.createTable(connectionSource, Ville.class);
+            TableUtils.createTable(connectionSource, Adresse.class);
+            TableUtils.createTable(connectionSource, Particulier.class);
+            TableUtils.createTable(connectionSource, Authentification.class);
+            TableUtils.createTable(connectionSource, Offre.class);
+            TableUtils.createTable(connectionSource, Reservation.class);
 
 
+
+
+
+
+            this.getPaysDao().create(new Pays("FR", "France"));
+            this.getPaysDao().create(new Pays("BE", "Belgique"));
+
+            this.getRolesDao().create(new Role("ROLE_PARTICULIER"));
+
+            this.getTypeCuisinesDao().create(new TypeCuisine("Cuisine régionale"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Africaine"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Steak house"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Gastronomique"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Grec"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Asiatique"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Espagnole"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Barbecue"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Provencale"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Bretonne"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Italienne"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Savoyard"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Alsacienne"));
+            this.getTypeCuisinesDao().create(new TypeCuisine("Mexicaine"));
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("DatabaseHelper", "Echec de la création de la database");
         }
     }
 
@@ -96,31 +120,12 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, TypeCuisine.class, false);
             TableUtils.dropTable(connectionSource, User.class, false);
             TableUtils.dropTable(connectionSource, Ville.class, false);
+
             onCreate(database, connectionSource);
 
 
-            this.getPaysDao().create(new Pays("FR", "France"));
-            this.getPaysDao().create(new Pays("BE","Belgique"));
-
-            this.getRolesDao().create(new Role("ROLE_PARTICULIER"));
-
-            this.getTypeCuisinesDao().create(new TypeCuisine("Cuisine régionale"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Africaine"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Steak house"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Gastronomique"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Grec"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Asiatique"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Espagnole"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Barbecue"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Provencale"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Bretonne"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Italienne"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Savoyard"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Alsacienne"));
-            this.getTypeCuisinesDao().create(new TypeCuisine("Mexicaine"));
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("DatabaseHelper", "Echec de la mise à jour de la database");
         }
     }
 
@@ -188,7 +193,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
 
-    public Dao<User, Long> getUserssDao() throws SQLException {
+    public Dao<User, Long> getUsersDao() throws SQLException {
         if (userssDao == null) {
             userssDao = getDao(User.class);
         }
