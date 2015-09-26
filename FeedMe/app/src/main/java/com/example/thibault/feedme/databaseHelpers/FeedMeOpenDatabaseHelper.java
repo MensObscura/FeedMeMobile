@@ -43,6 +43,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<TypeCuisine, Long> typeCuisinesDao;
     private Dao<User, Long> userssDao;
     private Dao<Ville, Long> villesDao;
+    private static FeedMeOpenDatabaseHelper instance;
 
     public FeedMeOpenDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION,
@@ -51,6 +52,15 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
                  * /res/raw/ directory of this project
                  * */
                 R.raw.ormlite_config);
+    }
+
+
+    public static synchronized FeedMeOpenDatabaseHelper getHelper(Context context)
+    {
+        if (instance == null)
+            instance = new FeedMeOpenDatabaseHelper(context);
+
+        return instance;
     }
 
     @Override
@@ -98,7 +108,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
         } catch (SQLException e) {
-            Log.e("DatabaseHelper", "Echec de la création de la database");
+            Log.e("DatabaseHelper", "Echec de la création de la database" +e);
         }
     }
 
@@ -206,5 +216,6 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return villesDao;
     }
+
 }
 

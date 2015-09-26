@@ -101,7 +101,7 @@ public class SignInFragment extends Fragment {
 
         String message = this.etName.getText().toString();
 
-        this.database = new FeedMeOpenDatabaseHelper(this.getActivity());
+        this.database = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
         String nom = this.etLastName.getText().toString();
         String prenom = this.etName.getText().toString();
@@ -112,26 +112,37 @@ public class SignInFragment extends Fragment {
 
         if (password.equals(confirm)) {
 
-            User user = new User(nom, email);
-            this.database.getUsersDao().create(user);
+            if(database != null) {
+                User user = new User(nom, email);
+                this.database.getUsersDao().create(user);
 
-            long  idUser = this.database.getUsersDao().extractId(user);
 
-            this.database.getParticuliersDao().create(new Particulier(prenom, birth, idUser));
+                this.database.getParticuliersDao().create(new Particulier(prenom, birth, user));
 
-            Role role = this.database.getRolesDao().queryForAll().get(0);
-            long idRole =this.database.getRolesDao().extractId(role);
-            this.database.getAuthentificationDao().create(new Authentification(password,idRole,idUser));
+                Role role;
+                if(this.database.getRolesDao().queryForAll().size() != 0) {
+                     role =this.database.getRolesDao().queryForAll().get(0);
+                }else{
+                    role = new Role("ROLE_PARTICULIER");
+                    this.database.getRolesDao().create(role);
+                }
 
-            Toast.makeText(getActivity(), "Hi, " + nom + " congrat you are in !", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(getActivity(), MainActivity.class);
 
-            Log.d("sign in",this.database.getUsersDao().objectToString(user));
+                this.database.getAuthentificationDao().create(new Authentification(password, role, user));
 
-            intent.putExtra("HOME_LOGIN", message);
-            startActivity(intent);
-            getActivity().finish();
+                Toast.makeText(getActivity(), "Hi, " + nom + " congrat you are in !", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+
+                Log.d("sign in", this.database.getUsersDao().objectToString(user));
+
+                intent.putExtra("HOME_LOGIN", message);
+                startActivity(intent);
+                getActivity().finish();
+            }else {
+                Toast.makeText(getActivity(), "database null", Toast.LENGTH_SHORT).show();
+            }
         } else {
 
             Toast.makeText(getActivity(), "Les password ne coresspondent pas", Toast.LENGTH_SHORT).show();

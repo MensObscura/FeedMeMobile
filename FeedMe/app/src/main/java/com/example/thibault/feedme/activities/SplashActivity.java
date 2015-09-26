@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.thibault.feedme.R;
+import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
 
 public class SplashActivity extends Activity {
 

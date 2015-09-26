@@ -7,7 +7,7 @@ import com.j256.ormlite.field.DatabaseField;
  */
 public class Authentification {
 
- 
+
     @DatabaseField
     String password;
     @DatabaseField(foreign = true, canBeNull = false)

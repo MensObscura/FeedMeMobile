@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.thibault.feedme.R;
 import com.example.thibault.feedme.activities.HomeLoginActivity;
+import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
 
 public class HomeLoginFragment extends Fragment {
 
@@ -25,6 +26,7 @@ public class HomeLoginFragment extends Fragment {
         //Instanciate Button
         bLogin = (Button) vLogin.findViewById(R.id.Blogin);
         bSignIn = (Button) vLogin.findViewById(R.id.Bsignin);
+
 
 
         bLogin.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,7 @@ public class HomeLoginFragment extends Fragment {
     }
 
     public void login() {
+
 
 
         LoginFragment fragmentLogin = new LoginFragment();

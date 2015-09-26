@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.example.thibault.feedme.MyOnClickListener;
 import com.example.thibault.feedme.R;
+import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
 import com.example.thibault.feedme.fragments.HomeLoginFragment;
 
 public class HomeLoginActivity extends FragmentActivity implements MyOnClickListener {
@@ -24,7 +25,7 @@ public class HomeLoginActivity extends FragmentActivity implements MyOnClickList
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_login);
-
+        FeedMeOpenDatabaseHelper.getHelper(this);
         //Fragment
         HomeLoginFragment.setMyOnClickListener(this);
 

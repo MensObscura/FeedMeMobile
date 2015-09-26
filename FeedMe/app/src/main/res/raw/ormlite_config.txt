@@ -1,5 +1,5 @@
 #
-# generated on 2015/09/26 03:54:08
+# generated on 2015/09/26 02:35:29
 #
 # --table-start--
 dataClass=com.example.thibault.feedme.Persistence.Adresse
@@ -11,6 +11,7 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=voie
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=ville
@@ -28,11 +29,14 @@ fieldName=password
 # --field-end--
 # --field-start--
 fieldName=idRole
+canBeNull=false
 foreign=true
 # --field-end--
 # --field-start--
 fieldName=idUser
+canBeNull=false
 foreign=true
+unique=true
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -47,24 +51,31 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=dateCreation
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=titre
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=prix
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=nbPrsn
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=durée
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=dateRepas
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=idAdress
+canBeNull=false
 foreign=true
 # --field-end--
 # --field-start--
@@ -72,6 +83,7 @@ fieldName=notes
 # --field-end--
 # --field-start--
 fieldName=menu
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=ageMin
@@ -81,13 +93,16 @@ fieldName=ageMax
 # --field-end--
 # --field-start--
 fieldName=animaux
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=typeCuisine
+canBeNull=false
 foreign=true
 # --field-end--
 # --field-start--
 fieldName=idUser
+canBeNull=false
 foreign=true
 # --field-end--
 # --table-fields-end--
@@ -103,9 +118,11 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=prenom
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=dateNaissance
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=idUser
@@ -124,9 +141,11 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=code
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=nom
+canBeNull=false
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -136,20 +155,22 @@ dataClass=com.example.thibault.feedme.Persistence.Reservation
 tableName=reservation
 # --table-fields-start--
 # --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
 fieldName=offreId
-id=true
+canBeNull=false
 foreign=true
 # --field-end--
 # --field-start--
 fieldName=conId
-id=true
+canBeNull=false
 foreign=true
 # --field-end--
 # --field-start--
-fieldName=etat
-# --field-end--
-# --field-start--
 fieldName=date
+canBeNull=false
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -178,6 +199,8 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=typeCuisine
+canBeNull=false
+unique=true
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -192,9 +215,12 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=nom
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=email
+canBeNull=false
+unique=true
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -209,9 +235,11 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=nom
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=codePostal
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=pays
