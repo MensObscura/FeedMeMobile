@@ -26,10 +26,11 @@
     <string name="email">Adresse e-mail</string>
     <string name="birthdate">Date de naissance</string>
     <string name="age">age</string>
-    <string name="validCGU">En confirmant l\'inscription vous accepter les CGU</string>
+    <string name="validCGU">En confirmant l\'inscription vous acceptez les CGU</string>
     <string name="validation">Confirmer</string>
     <string name="id">Identifiant</string>
-
+    <string name="champVide">Merci de Remplir tout les champs</string>
+    <string name="passwordIncompatible">Les password ne coresspondent pas</string>
     <!-- annonces -->
     <string name="title">Titre</string>
     <string name="nombreinvite">Nombre de places</string>
