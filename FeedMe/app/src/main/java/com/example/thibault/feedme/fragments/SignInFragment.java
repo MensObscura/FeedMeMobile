@@ -138,7 +138,7 @@ public class SignInFragment extends Fragment {
         //on verifie que les champs sont rempli
         this.allowConfirm = true;
         for(EditText e : this.editable){
-            if(e.getText().length()==0 ){
+            if(e.getText().toString().trim().length()==0 ){
                 this.allowConfirm = false;
                 e.setBackgroundColor(Color.RED);
 

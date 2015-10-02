@@ -1,8 +1,8 @@
 package com.example.thibault.feedme.fragments;
 
 
-
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thibault.feedme.Persistence.Authentification;
@@ -19,9 +18,6 @@ import com.example.thibault.feedme.Persistence.User;
 import com.example.thibault.feedme.R;
 import com.example.thibault.feedme.activities.MainActivity;
 import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.Where;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -63,9 +59,8 @@ public class LoginFragment extends Fragment {
 
     private void launchApp() throws SQLException {
 
-        if(etPassword.getText().length()==0){
 
-        }else if(authentification()) {
+        if (authentification()) {
 
 
             Toast.makeText(getActivity(), "Hi, congrat you are in !", Toast.LENGTH_SHORT).show();
@@ -75,10 +70,9 @@ public class LoginFragment extends Fragment {
             intent.putExtra("HOME_LOGIN", message);
             startActivity(intent);
             getActivity().finish();
-        }else{
-            Toast.makeText(getActivity(), "Combinaison mot de passse identifiant inconnu !", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     public boolean authentification() throws SQLException {
 
@@ -86,13 +80,31 @@ public class LoginFragment extends Fragment {
 
         String email = etName.getText().toString();
         String password = etPassword.getText().toString();
-        List<User> users = database.getUsersDao().queryBuilder().where().eq("email",email).query();
+        email = email.trim();
+        password = password.trim();
+        if (email.length() > 0 && password.length() > 0) {
 
-        if(users.size() == 1) {
 
-            List<Authentification> auth = database.getAuthentificationDao().queryBuilder().where().eq("idUser_id",users.get(0)).and().eq("password",password).query();
-            if(auth.size()==1){
-                return true;
+            List<User> users = database.getUsersDao().queryBuilder().where().eq("email", email).query();
+
+
+            if (users.size() == 1) {
+
+                List<Authentification> auth = database.getAuthentificationDao().queryBuilder().where().eq("idUser_id", users.get(0)).and().eq("password", password).query();
+                if (auth.size() == 1) {
+                    return true;
+                }
+            }
+            Toast.makeText(getActivity(), R.string.loginIncorrect, Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
+
+            if (password.isEmpty()) {
+                this.etPassword.setBackgroundColor(Color.RED);
+            }
+            if (email.isEmpty()){
+                this.etName.setBackgroundColor(Color.RED);
             }
         }
         return false;
