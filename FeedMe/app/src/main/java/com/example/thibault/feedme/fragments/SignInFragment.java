@@ -23,10 +23,11 @@ import com.example.thibault.feedme.R;
 import com.example.thibault.feedme.activities.MainActivity;
 import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
 
-
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class SignInFragment extends Fragment {
@@ -35,6 +36,8 @@ public class SignInFragment extends Fragment {
     private Button bValidate;
     private ImageButton ibCalendar;
     private Calendar calendar;
+
+    private boolean allowConfirm;
 
     private int day;
     private int month;
@@ -49,48 +52,70 @@ public class SignInFragment extends Fragment {
     private EditText etBirthdate;
 
     private FeedMeOpenDatabaseHelper database;
+    private List<EditText> editable;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View vSignIn = inflater.inflate(R.layout.fragment_signin, container, false);
 
         //Instanciate Button
         this.bValidate = (Button) vSignIn.findViewById(R.id.Bconfirm);
 
-        View.OnClickListener onDateEntryClick = new View.OnClickListener() {
-            public void onClick(View v) {
-                // Open a date piker
-                CreateDialog(0);
-            }
-        };
+        //ajout du onClickListener
         this.bValidate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //go to the home
                 try {
+                    //on Lance l'application
                     launchApp();
                 } catch (SQLException e) {
-                    Log.e("Sign in Fragement","Echec de l'enregistrement en bdd des données de l'utilisateur");
+                    Log.e("Sign in Fragement", "Echec de l'enregistrement en bdd des données de l'utilisateur : " +e);
                 }
 
             }
         });
 
 
+        //instanciation des inputs (editext)
         this.etName = (EditText) vSignIn.findViewById(R.id.ETname);
         this.etLastName = (EditText) vSignIn.findViewById(R.id.ETlastname);
         this.etPassword = (EditText) vSignIn.findViewById(R.id.ETpassword);
         this.etConfirmPassword = (EditText) vSignIn.findViewById(R.id.ETconfirmpassword);
         this.etEmail = (EditText) vSignIn.findViewById((R.id.ETmail));
+        this.etBirthDate = (EditText) vSignIn.findViewById(R.id.ETBirthDate);
+
+        //ajout des editText dans la liste
+        this.editable = new ArrayList<EditText>();
+        this.editable.add(this.etName);
+        this.editable.add(this.etLastName);
+        this.editable.add(this.etPassword);
+        this.editable.add(this.etConfirmPassword);
+        this.editable.add(this.etEmail);
+        this.editable.add(this.etBirthDate);
+
+        //Intanciation de l'image button calendrier et préparation des entrées de dates
 
         this.ibCalendar = (ImageButton) vSignIn.findViewById(R.id.IBCalendar);
         this.calendar = Calendar.getInstance();
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
         this.month = calendar.get(Calendar.MONTH);
         this.year = calendar.get(Calendar.YEAR);
-        this.etBirthDate = (EditText) vSignIn.findViewById(R.id.ETBirthDate);
+
+
+        //OnClick sur champs et image de date.
+        View.OnClickListener onDateEntryClick = new View.OnClickListener() {
+            public void onClick(View v) {
+                // Open a date piker
+                CreateDialog(0);
+            }
+        };
+
+        // ajout de datelistener
         this.ibCalendar.setOnClickListener(onDateEntryClick);
         this.etBirthDate.setOnClickListener(onDateEntryClick);
 
@@ -110,9 +135,19 @@ public class SignInFragment extends Fragment {
         String confirm = this.etConfirmPassword.getText().toString();
         Date birth = this.calendar.getTime();
 
-        if (password.equals(confirm)) {
+        //on verifie que les champs sont rempli
+        this.allowConfirm = true;
+        for(EditText e : this.editable){
+            if(e.getText().length()==0 ){
+                this.allowConfirm = false;
+                e.setBackgroundColor(Color.RED);
 
-            if(database != null) {
+            }
+
+        }
+        if (password.equals(confirm)&& allowConfirm) {
+
+            if (database != null) {
                 User user = new User(nom, email);
                 this.database.getUsersDao().create(user);
 
@@ -120,13 +155,12 @@ public class SignInFragment extends Fragment {
                 this.database.getParticuliersDao().create(new Particulier(prenom, birth, user));
 
                 Role role;
-                if(this.database.getRolesDao().queryForAll().size() != 0) {
-                     role =this.database.getRolesDao().queryForAll().get(0);
-                }else{
+                if (this.database.getRolesDao().queryForAll().size() != 0) {
+                    role = this.database.getRolesDao().queryForAll().get(0);
+                } else {
                     role = new Role("ROLE_PARTICULIER");
                     this.database.getRolesDao().create(role);
                 }
-
 
 
                 this.database.getAuthentificationDao().create(new Authentification(password, role, user));
@@ -140,14 +174,18 @@ public class SignInFragment extends Fragment {
                 intent.putExtra("HOME_LOGIN", message);
                 startActivity(intent);
                 getActivity().finish();
-            }else {
+            } else {
                 Toast.makeText(getActivity(), "database null", Toast.LENGTH_SHORT).show();
             }
         } else {
+            if(allowConfirm) {
+                Toast.makeText(getActivity(), R.string.passwordIncompatible, Toast.LENGTH_SHORT).show();
+                etPassword.setBackgroundColor(Color.RED);
+            }else{
+                Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
+            }
 
-            Toast.makeText(getActivity(), "Les password ne coresspondent pas", Toast.LENGTH_SHORT).show();
 
-            etPassword.setBackgroundColor(Color.RED);
 
         }
 
