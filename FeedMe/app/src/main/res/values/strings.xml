@@ -57,4 +57,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home_login">Connection</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="notanemail">Not a valid email</string>
 </resources>

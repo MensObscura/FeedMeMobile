@@ -70,7 +70,8 @@ public class ProfilFragment extends Fragment {
 
                 particulier = particuliers.get(0);
                 calendar.setTime(particulier.getDateNaissance());
-                
+                Log.d("ProfilFragment",calendar.get(calendar.YEAR)+"");
+                Log.d("ProfilFragment",particulier.getDateNaissance().get()+"");
                 int age = Calendar.getInstance().get(Calendar.YEAR) - calendar.get(calendar.YEAR);
 
                 //fill textView

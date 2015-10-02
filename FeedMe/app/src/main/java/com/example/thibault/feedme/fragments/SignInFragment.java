@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class SignInFragment extends Fragment {
@@ -97,6 +100,39 @@ public class SignInFragment extends Fragment {
         this.editable.add(this.etConfirmPassword);
         this.editable.add(this.etEmail);
         this.editable.add(this.etBirthDate);
+
+        //Verifcation email valid
+        this.etEmail.addTextChangedListener(new TextWatcher() {
+
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                boolean valid = Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$", s);
+
+                if (valid) {
+                    etEmail.setBackgroundColor(etEmail.getDrawingCacheBackgroundColor());
+                    bValidate.setActivated(true);
+
+                } else {
+                    etEmail.setBackgroundColor(Color.RED);
+                    Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
+                    bValidate.setActivated(false);
+                }
+            }
+        });
+
+
+
 
         //Intanciation de l'image button calendrier et préparation des entrées de dates
 
