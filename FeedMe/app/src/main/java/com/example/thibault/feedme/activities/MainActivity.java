@@ -1,8 +1,5 @@
 package com.example.thibault.feedme.activities;
 
-import java.util.ArrayList;
-
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -25,28 +22,31 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.thibault.feedme.Persistence.User;
 import com.example.thibault.feedme.R;
+import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
 import com.example.thibault.feedme.fragments.BookAnnounceFragment;
 import com.example.thibault.feedme.fragments.HomeFragment;
 import com.example.thibault.feedme.fragments.ListAnnounceFragment;
 import com.example.thibault.feedme.fragments.PostAnnounceFragment;
 import com.example.thibault.feedme.fragments.ProfilFragment;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<String> menu = new ArrayList<String>();
     private DrawerLayout menuLayout;
     private ListView menuElementsList;
     private ActionBarDrawerToggle menuToggle;
-
     private CharSequence menuTitle = "Menu";
     private CharSequence activityTitle = "FeedMe";
-
     private FragmentManager manager;
     private FragmentTransaction transaction;
-
-    ArrayList<String> menu = new ArrayList<String>();
-
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         // ajout premier fragment dans le layout nommé "mainLayout"
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linearMain);
+
 
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         menuLayout = (DrawerLayout) findViewById(R.id.menu_layout);
         menuElementsList = (ListView) findViewById(R.id.menu_elements);
+
 
         // set a custom shadow that overlays the main content when the drawer opens
         menuLayout.setDrawerShadow(R.drawable.drawer_shadow,
@@ -112,6 +114,34 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+        try {
+            this.currentUser = getCurrentUser();
+        } catch (SQLException e) {
+            Log.e("MainActivity", "Fail gettingUser : " + e);
+        }
+
+
+    }
+
+    public User getCurrentUser() throws SQLException {
+        FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this);
+
+
+        //Getting Current User
+
+        String email = this.getIntent().getStringExtra("HOME_LOGIN");
+
+        List<User> users = database.getUsersDao().queryBuilder().where().eq("email", email).query();
+
+
+        if (users.size() == 1) {
+
+            return users.get(0);
+
+
+        }
+        return null;
     }
 
     @Override
@@ -144,15 +174,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private class DrawerItemClickListener implements
-            ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            selectItem(position);
         }
     }
 
@@ -222,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
         menuLayout.closeDrawer(menuElementsList);
     }
 
-
     @Override
     public void setTitle(CharSequence title) {
         activityTitle = title;
@@ -257,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment current = manager.findFragmentByTag("fragment");
 
 
-        if (current != null && !current.getClass().equals(HomeFragment.class) && !current.getClass().equals(ListAnnounceFragment.class) ) {
+        if (current != null && !current.getClass().equals(HomeFragment.class) && !current.getClass().equals(ListAnnounceFragment.class)) {
 
 
             // Remplacer le fragment courant par le fragment Home
@@ -266,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
 
             transaction.commit();
             setTitle(getString(R.string.app_name));
-        }else if (current != null && !current.getClass().equals(HomeFragment.class)) {
+        } else if (current != null && !current.getClass().equals(HomeFragment.class)) {
 
 
             // Remplacer le fragment courant par le fragment List
@@ -275,11 +295,10 @@ public class MainActivity extends AppCompatActivity {
 
             transaction.commit();
             setTitle(getString(R.string.rechercher));
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
-
 
     // Before 2.0
     @Override
@@ -316,5 +335,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private class DrawerItemClickListener implements
+            ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            selectItem(position);
+        }
     }
 }

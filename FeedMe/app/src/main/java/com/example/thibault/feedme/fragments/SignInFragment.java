@@ -74,7 +74,7 @@ public class SignInFragment extends Fragment {
                     //on Lance l'application
                     launchApp();
                 } catch (SQLException e) {
-                    Log.e("Sign in Fragement", "Echec de l'enregistrement en bdd des données de l'utilisateur : " +e);
+                    Log.e("Sign in Fragement", "Echec de l'enregistrement en bdd des données de l'utilisateur : " + e);
                 }
 
             }
@@ -124,7 +124,6 @@ public class SignInFragment extends Fragment {
 
     private void launchApp() throws SQLException {
 
-        String message = this.etName.getText().toString();
 
         this.database = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
@@ -137,8 +136,8 @@ public class SignInFragment extends Fragment {
 
         //on verifie que les champs sont rempli
         this.allowConfirm = true;
-        for(EditText e : this.editable){
-            if(e.getText().toString().trim().length()==0 ){
+        for (EditText e : this.editable) {
+            if (e.getText().toString().trim().length() == 0) {
                 this.allowConfirm = false;
                 e.setBackgroundColor(Color.RED);
 
@@ -146,7 +145,7 @@ public class SignInFragment extends Fragment {
 
         }
         // si le mot de passe et la confirmation sont identique et que tout les champs sont remplis
-        if (password.equals(confirm)&& allowConfirm) {
+        if (password.equals(confirm) && allowConfirm) {
             //si la base est créée
             if (database != null) {
                 //On créé un user et sont role, puis une nouvelle authentification et on lance l'app
@@ -170,9 +169,7 @@ public class SignInFragment extends Fragment {
                 Toast.makeText(getActivity(), "Hi, " + nom + " congrat you are in !", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-
-                Log.d("sign in", this.database.getUsersDao().objectToString(user));
-
+                String message = email;
                 intent.putExtra("HOME_LOGIN", message);
                 startActivity(intent);
                 getActivity().finish();
@@ -181,13 +178,12 @@ public class SignInFragment extends Fragment {
             }
         } else {
             // Si pas de champs de vide, alors on signal que le mot de passe et la confirmation sont différents, sinon on signal les champs vides
-            if(allowConfirm) {
+            if (allowConfirm) {
                 Toast.makeText(getActivity(), R.string.passwordIncompatible, Toast.LENGTH_SHORT).show();
                 etPassword.setBackgroundColor(Color.RED);
-            }else{
+            } else {
                 Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
             }
-
 
 
         }
