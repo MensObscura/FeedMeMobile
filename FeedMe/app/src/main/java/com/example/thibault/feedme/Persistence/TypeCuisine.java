@@ -33,4 +33,12 @@ public class TypeCuisine {
 
         return sb.toString();
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTypeCuisine() {
+        return typeCuisine;
+    }
 }

@@ -42,4 +42,20 @@ public class Reservation {
 
         return sb.toString();
     }
+
+    public Offre getOffreId() {
+        return offreId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public User getConId() {
+        return conId;
+    }
+
+    public Timestamp getDate() {
+        return date;
+    }
 }

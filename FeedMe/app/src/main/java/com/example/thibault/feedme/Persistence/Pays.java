@@ -35,4 +35,16 @@ public class Pays {
 
         return sb.toString();
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getNom() {
+        return nom;
+    }
 }

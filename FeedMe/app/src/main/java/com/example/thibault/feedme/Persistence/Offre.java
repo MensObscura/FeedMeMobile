@@ -88,5 +88,65 @@ public class Offre {
         sb.append(", ").append("Initiateur").append(this.idUser.toString());
         return sb.toString();
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public TypeCuisine getTypeCuisine() {
+        return typeCuisine;
+    }
+
+    public User getIdUser() {
+        return idUser;
+    }
+
+    public boolean isAnimaux() {
+        return animaux;
+    }
+
+    public Integer getAgeMax() {
+        return ageMax;
+    }
+
+    public Integer getAgeMin() {
+        return ageMin;
+    }
+
+    public String getMenu() {
+        return menu;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public Adresse getIdAdress() {
+        return idAdress;
+    }
+
+    public Timestamp getDateRepas() {
+        return dateRepas;
+    }
+
+    public Time getDurée() {
+        return durée;
+    }
+
+    public Integer getNbPrsn() {
+        return nbPrsn;
+    }
+
+    public Integer getPrix() {
+        return prix;
+    }
+
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
 }
 

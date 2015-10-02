@@ -41,4 +41,20 @@ public class Particulier {
         sb.append(", ").append("utilisateur").append(this.idUser.toString());
         return sb.toString();
     }
+
+    public User getIdUser() {
+        return idUser;
+    }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public long getId() {
+        return id;
+    }
 }

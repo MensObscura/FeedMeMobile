@@ -36,4 +36,15 @@ public class User {
         return sb.toString();
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

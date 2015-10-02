@@ -39,4 +39,20 @@ public class Ville {
 
         return sb.toString();
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public Pays getPays() {
+        return pays;
+    }
 }

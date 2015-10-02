@@ -36,4 +36,16 @@ public class Adresse {
 
         return sb.toString();
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getVoie() {
+        return voie;
+    }
+
+    public Ville getVille() {
+        return ville;
+    }
 }
