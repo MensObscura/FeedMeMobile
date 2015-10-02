@@ -78,7 +78,6 @@
             android:layout_gravity="center"
             android:text="@string/email"
             android:padding="5dip"
-            android:singleLine="true"
             android:textColor="#000000"
             android:textSize="14dip" />
     </LinearLayout>

@@ -197,6 +197,8 @@ public class SignInFragment extends Fragment {
                                   int selectedMonth, int selectedDay) {
                 etBirthDate.setText(selectedDay + " / " + (selectedMonth + 1) + " / "
                         + selectedYear);
+
+                calendar.set(selectedYear,selectedMonth,selectedDay);
             }
         };
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), datePickerListener, this.year, this.month, this.day);

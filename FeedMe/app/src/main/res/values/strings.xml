@@ -32,6 +32,7 @@
     <string name="champVide">Merci de Remplir tout les champs</string>
     <string name="passwordIncompatible">Les password ne coresspondent pas</string>
     <string name="loginIncorrect">Combinaison mot de passse identifiant inconnu !</string>
+    <string name="notFound">User not found or multiple proposition</string>
     <!-- annonces -->
     <string name="title">Titre</string>
     <string name="nombreinvite">Nombre de places</string>

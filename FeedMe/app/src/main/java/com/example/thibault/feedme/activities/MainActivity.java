@@ -125,21 +125,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public User getCurrentUser() throws SQLException {
-        FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this);
+
+        if(currentUser == null) {
+            FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this);
 
 
-        //Getting Current User
+            //Getting Current User
 
-        String email = this.getIntent().getStringExtra("HOME_LOGIN");
+            String email = this.getIntent().getStringExtra("HOME_LOGIN");
 
-        List<User> users = database.getUsersDao().queryBuilder().where().eq("email", email).query();
-
-
-        if (users.size() == 1) {
-
-            return users.get(0);
+            List<User> users = database.getUsersDao().queryBuilder().where().eq("email", email).query();
 
 
+            if (users.size() == 1) {
+
+                return users.get(0);
+
+
+            }
+
+            Toast.makeText(this, R.string.notFound, Toast.LENGTH_LONG).show();
+
+        }else{
+            return  this.currentUser;
         }
         return null;
     }
