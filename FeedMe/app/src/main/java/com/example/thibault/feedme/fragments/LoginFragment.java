@@ -77,11 +77,11 @@ public class LoginFragment extends Fragment {
 
                 if(valid){
                     etName.setBackgroundColor(etName.getDrawingCacheBackgroundColor());
-                    bValidate.setActivated(true);
+                    bValidate.setEnabled(true);
                 }else{
                     etName.setBackgroundColor(Color.RED);
                     Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
-                    bValidate.setActivated(false);
+                    bValidate.setEnabled(false);
                 }
             }
         });
@@ -114,6 +114,7 @@ public class LoginFragment extends Fragment {
         String password = etPassword.getText().toString();
         email = email.trim();
         password = password.trim();
+        //si champ non vides on verifie les ID dans la base
         if (email.length() > 0 && password.length() > 0) {
 
 
