@@ -13,7 +13,7 @@ public class Adresse {
     long id;
     @DatabaseField(canBeNull = false)
     String voie;
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true)
     Ville ville;
 
 

@@ -10,9 +10,9 @@ public class Authentification {
 
     @DatabaseField
     String password;
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false,foreignAutoCreate = true)
     Role idRole;
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false, unique = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false, unique = true, foreignAutoCreate = true)
     User idUser;
 
 

@@ -13,7 +13,7 @@ public class Ville {
     String nom;
     @DatabaseField(canBeNull = false)
     String codePostal;
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true)
     Pays pays;
 
 
