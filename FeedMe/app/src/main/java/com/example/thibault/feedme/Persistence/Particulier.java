@@ -17,7 +17,7 @@ public class Particulier {
     String prenom;
     @DatabaseField(canBeNull = false)
     Date dateNaissance;
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     User idUser;
 
 

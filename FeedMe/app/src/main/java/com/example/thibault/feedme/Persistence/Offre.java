@@ -26,7 +26,7 @@ public class Offre {
     Integer durée;
     @DatabaseField(canBeNull = false)
     Date dateRepas;
-    @DatabaseField(foreign = true, canBeNull = false)
+    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true)
     Adresse idAdress;
     @DatabaseField
     String notes;
@@ -38,9 +38,9 @@ public class Offre {
     Integer ageMax;
     @DatabaseField(canBeNull = false)
     boolean animaux;
-    @DatabaseField(foreign = true,canBeNull = false)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true,canBeNull = false)
     TypeCuisine typeCuisine;
-    @DatabaseField(foreign = true,canBeNull = false)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true,canBeNull = false)
     User idUser;
 
 
