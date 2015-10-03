@@ -11,6 +11,7 @@
 
 
         <TextView
+            android:id="@+id/TVtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -178,11 +179,21 @@
                 android:textColor="#999999"
                 android:textSize="14dip" />
 
+            <TextView
+                android:id="@+id/TVtotalPlaces"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dip"
+                android:textColor="#000000"
+                android:textSize="14dip" />
+
             <Button
                 android:id="@+id/Bconfirm_book"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
+                android:textSize="14dip"
                 android:text="@string/validation" />
         </LinearLayout>
 

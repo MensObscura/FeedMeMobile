@@ -55,6 +55,10 @@ public class ListAnnounceFragment extends Fragment {
 
                                                      // Remplacer le fragment courant par le fragment reserver
                                                      BookAnnounceFragment fBook = new BookAnnounceFragment();
+                                                     Bundle bundle = new Bundle();
+                                                     long idOffre = ((ListAnnounceAdapter)announces.getAdapter()).getOffreIdFromPosition(position);
+                                                     bundle.putString("offre",""+idOffre);
+                                                     fBook.setArguments(bundle);
                                                      transaction.replace(current.getId(), fBook, "fragment");
 
                                                      transaction.commit();

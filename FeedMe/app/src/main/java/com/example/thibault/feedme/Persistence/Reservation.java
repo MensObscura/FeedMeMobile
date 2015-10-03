@@ -3,6 +3,7 @@ package com.example.thibault.feedme.Persistence;
 import com.j256.ormlite.field.DatabaseField;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by Thibault on 19/09/2015.
@@ -20,14 +21,14 @@ public class Reservation {
      * String etat;
      */
     @DatabaseField(canBeNull = false)
-    Timestamp date;
+    Date date;
 
 
     Reservation() {
         // needed by ormlite
     }
 
-    public Reservation(Offre offreId, User conId, Timestamp date) {
+    public Reservation(Offre offreId, User conId, Date date) {
 
         this.offreId = offreId;
         this.conId = conId;
@@ -57,7 +58,7 @@ public class Reservation {
         return conId;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 }

@@ -1,18 +1,22 @@
 package com.example.thibault.feedme.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.thibault.feedme.Persistence.Offre;
+import com.example.thibault.feedme.Persistence.Reservation;
+import com.example.thibault.feedme.Persistence.Ville;
 import com.example.thibault.feedme.R;
+import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
+import com.example.thibault.feedme.fragments.ListAnnounceFragment;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -20,28 +24,25 @@ import java.util.List;
  */
 public class ListAnnounceAdapter extends BaseAdapter {
     private Context mContext;
-    private List<String> announces;
+    private List<Offre> announces;
+    private FeedMeOpenDatabaseHelper databaseHelper;
 
     // Gets the context so it can be used later
     public ListAnnounceAdapter(Context c) {
-        mContext = c;
-        announces = new ArrayList<String>();
-        announces.add("Choucroute");
-        announces.add("Bouillabaisse");
-        announces.add("Filet de veau");
-        announces.add("Pieds de porc");
-        announces.add("vessie de lapin");
-        announces.add("Cuisses de grenouilles");
-        announces.add("Escargot en sauce");
-        announces.add("Rognons à la biere");
-        announces.add("Foie de morue");
-        announces.add("Jambon à la thibaud");
-        announces.add("Canard laqué Chino-Algérien");
+        this.mContext = c;
+
+        this.databaseHelper = FeedMeOpenDatabaseHelper.getHelper(c);
+        this.announces = null;
+        try {
+            this.announces = this.databaseHelper.getOffresDao().queryForAll();
+        } catch (SQLException e) {
+            Log.e("ListAnnounceAdapter", "failed to get Offres from database");
+        }
     }
 
     // Total number of things contained within the adapter
     public int getCount() {
-        return announces.size();
+        return this.announces.size();
     }
 
     // Require for structure, not really used in my code.
@@ -59,24 +60,76 @@ public class ListAnnounceAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View outputView;
-        TextView title;
+        TextView tvTitle;
+        TextView tvAdresse;
+        TextView tvTypecusine;
+        TextView tvPrice;
+        TextView tvRemainPlace;
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             outputView = convertView;
 
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             outputView = inflater.inflate(R.layout.card_announce, null);
 
 
         } else {
             outputView = convertView;
         }
-        title = (TextView) outputView.findViewById(R.id.TVcard_title);
-        title.setText(announces.get(position));
+        tvTitle = (TextView) outputView.findViewById(R.id.TVcard_title);
+        tvAdresse = (TextView) outputView.findViewById(R.id.TVcard_ville);
+        tvPrice = (TextView) outputView.findViewById(R.id.TVcard_price);
+        tvTypecusine = (TextView) outputView.findViewById(R.id.TVcard_type);
+        tvRemainPlace = (TextView) outputView.findViewById(R.id.TVcard_remain_place);
+
+        tvTitle.setText(this.announces.get(position).getTitre());
+       // Log.d("testMagueuele",this.announces.get(position).toString());
+       // tvAdresse.setText(this.announces.get(position).getIdAdress().getVille().getNom());
+        tvPrice.setText(this.announces.get(position).getPrix() + "");
+        tvTypecusine.setText(this.announces.get(position).getTypeCuisine().getTypeCuisine());
+
+
+        // on calcul le nombre de place restantes
+        List<Reservation> reservations = null;
+        List<Ville> villes = null;
+        try {
+
+            reservations = this.databaseHelper.getReservationDao().queryBuilder().where().eq("offreId_id", announces.get(position)).query();
+            villes = this.databaseHelper.getVillesDao().queryForAll();
+
+            for(Ville v :villes){
+                Log.d("ListAnnounceFragment",v.toString());
+            }
+
+        } catch (SQLException e) {
+            Log.e("ListAnnounceAdapter", "Failed to get Reservation on offre " + this.announces.get(position).getTitre() + " : " + e);
+        }
+
+        if (reservations != null) {
+
+            int nbReservation = reservations.size();
+            int remainPlace = this.announces.get(position).getNbPrsn() - nbReservation;
+
+            if (remainPlace > 0) {
+                tvRemainPlace.setText("" + remainPlace);
+            } else {
+                tvRemainPlace.setText("Complet");
+            }
+
+
+        } else {
+
+            Toast.makeText(this.mContext, R.string.reservationNotFound, Toast.LENGTH_SHORT);
+        }
 
 
         outputView.setId(position);
 
         return outputView;
+    }
+
+    public long getOffreIdFromPosition(int position){
+
+        return this.announces.get(position).getId();
     }
 }

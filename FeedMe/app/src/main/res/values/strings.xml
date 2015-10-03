@@ -61,4 +61,10 @@
     <string name="notanemail">Not a valid email</string>
     <string name="paysnotfound">Pays note found in database</string>
     <string name="typecuisinenotfound">Type cuisine not found in database</string>
+    <string name="reservationNotFound">Unable to found list of reservation</string>
+    <string name="offreNotFound">unbale to find offre or multiple proposition</string>
+    <string name="particulierNotFound">Cannot get  particulier from database</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="mustbeInferiorOrEqual">Le champ doit être inférieur ou egal au nombre de place restantes</string>
 </resources>

@@ -106,7 +106,6 @@ public class PostAnnounceFragment extends Fragment {
             public void onClick(View v) {
 
 
-
                 if (insertOffreInDatabase()) {
 
                     Toast.makeText(getActivity(), "Annonce Postée", Toast.LENGTH_SHORT).show();
@@ -172,11 +171,11 @@ public class PostAnnounceFragment extends Fragment {
 
                     int min = Integer.parseInt(ages[0]);
                     int max = Integer.parseInt(ages[1]);
-                    if(max > min) {
+                    if (max > min) {
                         etAge.setBackgroundColor(etAge.getDrawingCacheBackgroundColor());
                         bConfirm.setEnabled(true);
-                    }else {
-                        Toast.makeText(getActivity(),"max must be gretter than min",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "max must be gretter than min", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     etAge.setBackgroundColor(Color.RED);
@@ -329,7 +328,7 @@ public class PostAnnounceFragment extends Fragment {
             FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
 
-                //On récupère toutes les données
+            //On récupère toutes les données
             String titre = this.etTitle.getText().toString();
             Integer nbPlace = Integer.parseInt(this.etNbPlaces.getText().toString());
             Integer price = Integer.parseInt(this.etPrice.getText().toString());
@@ -341,10 +340,18 @@ public class PostAnnounceFragment extends Fragment {
             Date creationOffre = Calendar.getInstance().getTime();
             String menu = this.etMenu.getText().toString();
             String typeCuisine = this.sType.getSelectedItem().toString();
-            Integer duration = Integer.parseInt(this.etDuration.getText().toString());
-            String [] ages = this.etAge.getText().toString().trim().split("-");
-            Integer ageMin = Integer.parseInt(ages[0]);
-            Integer ageMax = Integer.parseInt(ages[1]);
+            Integer duration = 0;
+            if (this.etDuration.getText().toString().trim().length() != 0)
+                duration = Integer.parseInt(this.etDuration.getText().toString());
+
+            Integer ageMin = 0;
+            Integer ageMax = 100;
+            if (this.etAge.getText().length() != 0) {
+                String[] ages = this.etAge.getText().toString().trim().split("-");
+                ageMin = Integer.parseInt(ages[0]);
+                ageMax = Integer.parseInt(ages[1]);
+            }
+
             String brief = this.etBrief.getText().toString();
             boolean pets = this.cbPets.isChecked();
 
@@ -354,17 +361,17 @@ public class PostAnnounceFragment extends Fragment {
 
             List<Pays> listPays = null;
             try {
-                listPays = databaseHelper.getPaysDao().queryBuilder().where().eq("nom",pays).query();
+                listPays = databaseHelper.getPaysDao().queryBuilder().where().eq("nom", pays).query();
             } catch (SQLException e) {
-                Log.e("PostAnnouceFragement","Echec getting pays from database : "+e);
+                Log.e("PostAnnouceFragement", "Echec getting pays from database : " + e);
                 return false;
             }
-            if(listPays != null && listPays.size() == 1){
+            if (listPays != null && listPays.size() == 1) {
                 objetPays = listPays.get(0);
-            }else{
-                Toast.makeText(this.getActivity(),R.string.paysnotfound,Toast.LENGTH_SHORT).show();
-                Log.e("PostannouceFragment","Echec find pays, no tuple on multiple possibility");
-                return  false;
+            } else {
+                Toast.makeText(this.getActivity(), R.string.paysnotfound, Toast.LENGTH_SHORT).show();
+                Log.e("PostannouceFragment", "Echec find pays, no tuple on multiple possibility");
+                return false;
             }
 
             //On récupère le Type de cuisine
@@ -372,36 +379,35 @@ public class PostAnnounceFragment extends Fragment {
 
             List<TypeCuisine> listTypeCuisine = null;
             try {
-                listTypeCuisine = databaseHelper.getTypeCuisinesDao().queryBuilder().where().eq("typeCuisine",typeCuisine).query();
+                listTypeCuisine = databaseHelper.getTypeCuisinesDao().queryBuilder().where().eq("typeCuisine", typeCuisine).query();
             } catch (SQLException e) {
-                Log.e("PostAnnouceFragement","Echec getting Type cuisine from database: "+e);
+                Log.e("PostAnnouceFragement", "Echec getting Type cuisine from database: " + e);
                 return false;
             }
-            if(listTypeCuisine != null && listTypeCuisine.size() == 1){
+            if (listTypeCuisine != null && listTypeCuisine.size() == 1) {
                 objetTypeCusine = listTypeCuisine.get(0);
-            }else{
-                Toast.makeText(this.getActivity(),R.string.typecuisinenotfound,Toast.LENGTH_SHORT).show();
-                Log.e("PostannouceFragment","Echec find Type cuisine, no tuple on multiple possibility");
-                return  false;
+            } else {
+                Toast.makeText(this.getActivity(), R.string.typecuisinenotfound, Toast.LENGTH_SHORT).show();
+                Log.e("PostannouceFragment", "Echec find Type cuisine, no tuple on multiple possibility");
+                return false;
             }
 
-                //on crée les objets !
-            Ville objetVille = new Ville(city,cp,objetPays);
-            Adresse objetAdresse = new Adresse(street,objetVille);
+            //on crée les objets !
+            Ville objetVille = new Ville(city, cp, objetPays);
+            Adresse objetAdresse = new Adresse(street, objetVille);
 
 
             try {
-                Offre objetOffre = new Offre(creationOffre,titre,price,nbPlace,duration,dateRepas,objetAdresse,brief,menu,ageMin,ageMax,pets,objetTypeCusine,((MainActivity)this.getActivity()).getCurrentUser());
+                Offre objetOffre = new Offre(creationOffre, titre, price, nbPlace, duration, dateRepas, objetAdresse, brief, menu, ageMin, ageMax, pets, objetTypeCusine, ((MainActivity) this.getActivity()).getCurrentUser());
 
                 //On insert tout dans la database
-                databaseHelper.getVillesDao().create(objetVille);
-                databaseHelper.getAdressesDao().create(objetAdresse);
-                databaseHelper.getOffresDao().create(objetOffre);
-            } catch (SQLException e) {
-                Log.e("PostAnnouceFragment","Echec inserting offre in database : "+e);
-                return  false;
-            }
 
+                databaseHelper.getOffresDao().create(objetOffre);
+                Log.d("PostAnnounceFragment", objetOffre.toString());
+            } catch (SQLException e) {
+                Log.e("PostAnnouceFragment", "Echec inserting offre in database : " + e);
+                return false;
+            }
 
 
             return true;
