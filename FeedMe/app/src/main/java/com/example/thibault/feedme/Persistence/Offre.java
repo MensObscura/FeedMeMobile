@@ -23,9 +23,9 @@ public class Offre {
     @DatabaseField(canBeNull = false)
     Integer nbPrsn;
     @DatabaseField(canBeNull = false)
-    Time durée;
+    Integer durée;
     @DatabaseField(canBeNull = false)
-    Timestamp dateRepas;
+    Date dateRepas;
     @DatabaseField(foreign = true, canBeNull = false)
     Adresse idAdress;
     @DatabaseField
@@ -51,7 +51,7 @@ public class Offre {
         // needed by ormlite
     }
 
-    public Offre(Date dateCreation, String titre, Integer prix,Integer nbPrsn,Time durée, Timestamp dateRepas, Adresse idAdress, String notes, String menu,Integer ageMin, Integer ageMax,boolean animaux, TypeCuisine typeCuisine, User idUser) {
+    public Offre(Date dateCreation, String titre, Integer prix,Integer nbPrsn,Integer durée, Date dateRepas, Adresse idAdress, String notes, String menu,Integer ageMin, Integer ageMax,boolean animaux, TypeCuisine typeCuisine, User idUser) {
 
         this.dateCreation =dateCreation;
         this.titre=titre;
@@ -125,11 +125,11 @@ public class Offre {
         return idAdress;
     }
 
-    public Timestamp getDateRepas() {
+    public Date getDateRepas() {
         return dateRepas;
     }
 
-    public Time getDurée() {
+    public Integer getDurée() {
         return durée;
     }
 

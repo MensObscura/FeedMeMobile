@@ -52,10 +52,13 @@
     <string name="pet">Présence d\'un animal</string>
     <string name="valid">Valider</string>
     <string name="templateDate">jj/mm/aaaa</string>
+    <string name="trancheAge">min-max</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home_login">Connection</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="notanemail">Not a valid email</string>
+    <string name="paysnotfound">Pays note found in database</string>
+    <string name="typecuisinenotfound">Type cuisine not found in database</string>
 </resources>

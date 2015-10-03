@@ -54,6 +54,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:inputType="number"
                 android:hint="@string/nombreinvite"
                 android:padding="5dip"
                 android:singleLine="true"
@@ -82,6 +83,7 @@
                 android:layout_gravity="center"
                 android:hint="@string/Price"
                 android:padding="5dip"
+                android:inputType="number"
                 android:singleLine="true"
                 android:textColor="#999999"
                 android:textSize="14dip" />
@@ -196,16 +198,10 @@
                     android:textColor="#000000"
                     android:textSize="14dip" />
 
-                <EditText
-                    android:id="@+id/ETaddress"
+                <Spinner
+                    android:id="@+id/Spays"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:hint="@string/country"
-                    android:padding="5dip"
-                    android:singleLine="true"
-                    android:textColor="#999999"
-                    android:textSize="14dip" />
+                    android:layout_height="30dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -326,6 +322,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="@string/duration"
+                android:inputType="number"
                 android:padding="5dip"
                 android:singleLine="false"
                 android:textColor="#999999"
@@ -344,7 +341,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="@string/age"
+                android:hint="@string/trancheAge"
                 android:padding="5dip"
                 android:singleLine="false"
                 android:textColor="#999999"
