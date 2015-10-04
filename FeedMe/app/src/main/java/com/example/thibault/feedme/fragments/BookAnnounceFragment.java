@@ -68,21 +68,21 @@ public class BookAnnounceFragment extends Fragment {
                                              @Override
                                              public void onClick(View v) {
 
-                                                 if(etBookPlace.getText().toString().trim().length() == 0){
-                                                     Toast.makeText(getActivity(),R.string.champVide,Toast.LENGTH_SHORT).show();
+                                                 if (etBookPlace.getText().toString().trim().length() == 0) {
+                                                     Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
                                                      etBookPlace.setBackgroundColor(Color.RED);
-                                                 }else if (currentOffre != null) {
+                                                 } else if (currentOffre != null) {
 
                                                      FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(getActivity());
 
                                                      try {
                                                          //On crée autant de reservation que le nombre de place entrée
-                                                         Log.d("BookAnnounceFragment","toc");
+                                                         Log.d("BookAnnounceFragment", "toc");
                                                          for (int i = 0; i < Integer.parseInt(etBookPlace.getText().toString()); i++) {
-                                                             Log.d("BookAnnounceFragment",""+i);
+                                                             Log.d("BookAnnounceFragment", "" + i);
                                                              databaseHelper.getReservationDao().create(new Reservation(currentOffre, ((MainActivity) getActivity()).getCurrentUser(), Calendar.getInstance().getTime()));
                                                          }
-                                                         Log.d("BookAnnounceFragment","out");
+                                                         Log.d("BookAnnounceFragment", "out");
                                                          List<Reservation> list = databaseHelper.getReservationDao().queryForAll();
 
                                                      } catch (SQLException e) {
@@ -147,7 +147,7 @@ public class BookAnnounceFragment extends Fragment {
 
             this.tvTitle.setText(offre.getTitre());
             this.tvNameAuthor.setText(offre.getIdUser().getNom() + " " + particulier.getPrenom());
-            // this.tvAddress.setText(offre.getIdAdress().getVoie() + "\n"+ offre.getIdAdress().getVille().getCodePostal() +" "+offre.getIdAdress().getVille().getNom()+"\n"+offre.getIdAdress().getVille().getPays().getNom() );
+            this.tvAddress.setText(offre.getIdAdress().getVoie() + "\n" + offre.getIdAdress().getVille().getCodePostal() + " " + offre.getIdAdress().getVille().getNom() + "\n" + offre.getIdAdress().getVille().getPays().getNom());
             this.tvPrice.setText(offre.getPrix() + " €");
             this.tvDate.setText(offre.getDateRepas().toString());
             this.tvMenu.setText(offre.getMenu());
@@ -156,10 +156,10 @@ public class BookAnnounceFragment extends Fragment {
                 this.etBookPlace.setEnabled(false);
                 this.bConfirm.setEnabled(false);
             }
-            //  this.tvTypeCuisine.setText(offre.getTypeCuisine().getTypeCuisine());
-            this.tvDuration.setText(offre.getDurée() == 0 ? "inconnue" : offre.getDurée() + "");
+            this.tvTypeCuisine.setText(offre.getTypeCuisine().getTypeCuisine());
+            this.tvDuration.setText(getString(R.string.duration)+" : "+(offre.getDurée() == 0 ? "inconnue" : offre.getDurée()) + "");
             String animaux = getString(offre.isAnimaux() ? R.string.yes : R.string.no);
-            this.tvPets.setText("Animaux de compagnie : " + animaux );
+            this.tvPets.setText("Animaux de compagnie : " + animaux);
             this.tvBrief.setText(offre.getNotes());
             this.tvTotalPlaces.setText(remainPlaces + "");
             this.defineEtBookPlace(remainPlaces);
@@ -189,7 +189,7 @@ public class BookAnnounceFragment extends Fragment {
                     }
                     etBookPlace.setBackgroundColor(etBookPlace.getDrawingCacheBackgroundColor());
                     bConfirm.setEnabled(true);
-                }else{
+                } else {
                     etBookPlace.setBackgroundColor(Color.RED);
                     bConfirm.setEnabled(false);
                 }

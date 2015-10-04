@@ -121,11 +121,11 @@ public class SignInFragment extends Fragment {
 
                 if (valid) {
                     etEmail.setBackgroundColor(etEmail.getDrawingCacheBackgroundColor());
-                    bValidate.setEnabled(true);;
+                    bValidate.setEnabled(true);
 
                 } else {
                     etEmail.setBackgroundColor(Color.RED);
-                    Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
                     bValidate.setEnabled(false);
                 }
             }

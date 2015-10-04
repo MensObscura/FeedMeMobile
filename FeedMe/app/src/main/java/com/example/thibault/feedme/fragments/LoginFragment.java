@@ -80,7 +80,7 @@ public class LoginFragment extends Fragment {
                     bValidate.setEnabled(true);
                 }else{
                     etName.setBackgroundColor(Color.RED);
-                    Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
                     bValidate.setEnabled(false);
                 }
             }

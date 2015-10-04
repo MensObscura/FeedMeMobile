@@ -83,23 +83,16 @@ public class ListAnnounceAdapter extends BaseAdapter {
         tvRemainPlace = (TextView) outputView.findViewById(R.id.TVcard_remain_place);
 
         tvTitle.setText(this.announces.get(position).getTitre());
-       // Log.d("testMagueuele",this.announces.get(position).toString());
-       // tvAdresse.setText(this.announces.get(position).getIdAdress().getVille().getNom());
+        tvAdresse.setText(this.announces.get(position).getIdAdress().getVille().getNom());
         tvPrice.setText(this.announces.get(position).getPrix() + "");
         tvTypecusine.setText(this.announces.get(position).getTypeCuisine().getTypeCuisine());
 
 
         // on calcul le nombre de place restantes
         List<Reservation> reservations = null;
-        List<Ville> villes = null;
         try {
 
             reservations = this.databaseHelper.getReservationDao().queryBuilder().where().eq("offreId_id", announces.get(position)).query();
-            villes = this.databaseHelper.getVillesDao().queryForAll();
-
-            for(Ville v :villes){
-                Log.d("ListAnnounceFragment",v.toString());
-            }
 
         } catch (SQLException e) {
             Log.e("ListAnnounceAdapter", "Failed to get Reservation on offre " + this.announces.get(position).getTitre() + " : " + e);
