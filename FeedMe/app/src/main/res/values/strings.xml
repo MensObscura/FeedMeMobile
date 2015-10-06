@@ -54,7 +54,7 @@
     <string name="templateDate">jj/mm/aaaa</string>
     <string name="trancheAge">min-max</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home_login">Connection</string>
     <string name="title_activity_splash">SplashActivity</string>
@@ -67,4 +67,5 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="mustbeInferiorOrEqual">Le champ doit être inférieur ou egal au nombre de place restantes</string>
+    <string name="exampleMail">example@mail.com</string>
 </resources>
