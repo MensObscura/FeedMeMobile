@@ -59,6 +59,22 @@ public class ListAnnounceAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
+
+
+        View outputView = this.initComponant(convertView , position);
+
+
+
+
+
+        outputView.setId(position);
+
+        return outputView;
+    }
+
+
+    private View initComponant(View convertView, int position) {
+
         View outputView;
         TextView tvTitle;
         TextView tvAdresse;
@@ -87,6 +103,21 @@ public class ListAnnounceAdapter extends BaseAdapter {
         tvPrice.setText(this.announces.get(position).getPrix() + "");
         tvTypecusine.setText(this.announces.get(position).getTypeCuisine().getTypeCuisine());
 
+        int remainPlace = this.getRemainPlace(position);
+        if (remainPlace > 0) {
+            tvRemainPlace.setText("" + remainPlace);
+        } else {
+            tvRemainPlace.setText("Complet");
+        }
+        return outputView;
+    }
+
+    public long getOffreIdFromPosition(int position){
+
+        return this.announces.get(position).getId();
+    }
+
+    public int getRemainPlace(int position) {
 
         // on calcul le nombre de place restantes
         List<Reservation> reservations = null;
@@ -103,26 +134,12 @@ public class ListAnnounceAdapter extends BaseAdapter {
             int nbReservation = reservations.size();
             int remainPlace = this.announces.get(position).getNbPrsn() - nbReservation;
 
-            if (remainPlace > 0) {
-                tvRemainPlace.setText("" + remainPlace);
-            } else {
-                tvRemainPlace.setText("Complet");
-            }
-
+            return remainPlace;
 
         } else {
 
             Toast.makeText(this.mContext, R.string.reservationNotFound, Toast.LENGTH_SHORT);
         }
-
-
-        outputView.setId(position);
-
-        return outputView;
-    }
-
-    public long getOffreIdFromPosition(int position){
-
-        return this.announces.get(position).getId();
+       return 0;
     }
 }
