@@ -55,21 +55,34 @@ public class MainActivity extends AppCompatActivity {
 
         // ajout premier fragment dans le layout nommé "mainLayout"
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linearMain);
+        this.setFragment(mainLayout);
 
 
-        manager = getSupportFragmentManager();
-        transaction = manager.beginTransaction();
-
-        Fragment myFrag = new HomeFragment();
-        transaction.add(mainLayout.getId(), myFrag, "fragment");
-        transaction.commit();
-
-        menuLayout = (DrawerLayout) findViewById(R.id.menu_layout);
-        menuElementsList = (ListView) findViewById(R.id.menu_elements);
+        this.initComponants();
 
 
+        this.fillMenu();
+
+        // On sauvegarde le current user
+        try {
+            this.currentUser = getCurrentUser();
+        } catch (SQLException e) {
+            Log.e("MainActivity", "Fail gettingUser : " + e);
+        }
+
+
+    }
+
+    private void initComponants() {
+
+        this.menuLayout = (DrawerLayout) findViewById(R.id.menu_layout);
+        this.menuElementsList = (ListView) findViewById(R.id.menu_elements);
+    }
+
+
+    private void fillMenu() {
         // set a custom shadow that overlays the main content when the drawer opens
-        menuLayout.setDrawerShadow(R.drawable.drawer_shadow,
+        this.menuLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
         // Liste des elements du menu
@@ -77,22 +90,39 @@ public class MainActivity extends AppCompatActivity {
                 this, R.layout.element_menu);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        menu.add(getString(R.string.profil));
-        menu.add(getString(R.string.deposer));
-        menu.add(getString(R.string.rechercher));
-        menu.add(getString(R.string.logout));
+        this.menu.add(getString(R.string.profil));
+        this.menu.add(getString(R.string.deposer));
+        this.menu.add(getString(R.string.rechercher));
+        this.menu.add(getString(R.string.logout));
         for (int i = 0; i < menu.size(); i++) {
             adapter.add(menu.get(i));
         }
-        menuElementsList.setAdapter(adapter);
-        menuElementsList.setOnItemClickListener(new DrawerItemClickListener());
+
+        //On set l'adapter
+        this.menuElementsList.setAdapter(adapter);
+
+        this.menuElementsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectItem(position);
+            }
+        });
+
         // enable ActionBar app icon to behave as action to toggle menu
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        this.initToggle();
+
+        this.menuLayout.setDrawerListener(menuToggle);
+
+
+    }
+
+    private void initToggle() {
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
-        menuToggle = new ActionBarDrawerToggle(this, /* host Activity */
+        this.menuToggle = new ActionBarDrawerToggle(this, /* host Activity */
                 menuLayout, /* DrawerLayout object */
                 R.string.drawer_open, /* "open drawer" description for accessibility */
                 R.string.drawer_close /* "close drawer" description for accessibility */
@@ -107,26 +137,23 @@ public class MainActivity extends AppCompatActivity {
                 invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
-        menuLayout.setDrawerListener(menuToggle);
 
-        // If Application just started select Current TimeZone
-        if (savedInstanceState == null) {
+    }
 
 
-        }
+    private void setFragment(LinearLayout mainLayout) {
+        // on fait l'ajout du fragment dans le layout donné
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
 
-        try {
-            this.currentUser = getCurrentUser();
-        } catch (SQLException e) {
-            Log.e("MainActivity", "Fail gettingUser : " + e);
-        }
-
-
+        Fragment myFrag = new HomeFragment();
+        transaction.add(mainLayout.getId(), myFrag, "fragment");
+        transaction.commit();
     }
 
     public User getCurrentUser() throws SQLException {
 
-        if(currentUser == null) {
+        if (currentUser == null) {
             FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this);
 
 
@@ -146,8 +173,8 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(this, R.string.notFound, Toast.LENGTH_LONG).show();
 
-        }else{
-            return  this.currentUser;
+        } else {
+            return this.currentUser;
         }
         return null;
     }
@@ -276,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
         menuToggle.onConfigurationChanged(newConfig);
     }
 
-    // 2.0 and above
+    // 2.0 and above on button back pressed
     @Override
     public void onBackPressed() {
 
@@ -308,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Before 2.0
+    // Before 2.0 on button back pressed
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -345,12 +372,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private class DrawerItemClickListener implements
-            ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            selectItem(position);
-        }
-    }
 }
