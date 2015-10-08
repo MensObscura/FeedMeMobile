@@ -14,10 +14,10 @@
     <!-- inscription/profil/login -->
     <string name="login">Login</string>
     <string name="signin">Sign in</string>
-    <string name="profil">profil</string>
-    <string name="logout">Deconnexion</string>
+    <string name="profil">Profil</string>
+    <string name="logout">Déconnexion</string>
     <string name="rechercher">Rechercher un repas</string>
-    <string name="reservation">Reserver un couvert</string>
+    <string name="reservation">Réserver un couvert</string>
     <string name="deposer">Proposer un repas</string>
     <string name="lastname">Nom</string>
     <string name="name">Prénom</string>
@@ -25,18 +25,18 @@
     <string name="confirmpassword">Confirmer le mot de passe</string>
     <string name="email">Adresse e-mail</string>
     <string name="birthdate">Date de naissance</string>
-    <string name="age">age</string>
+    <string name="age">Age</string>
     <string name="validCGU">En confirmant l\'inscription vous acceptez les CGU</string>
     <string name="validation">Confirmer</string>
     <string name="id">Identifiant</string>
-    <string name="champVide">Merci de Remplir tout les champs</string>
-    <string name="passwordIncompatible">Les password ne coresspondent pas</string>
-    <string name="loginIncorrect">Combinaison mot de passse identifiant inconnu !</string>
+    <string name="champVide">Merci de remplir tous les champs</string>
+    <string name="passwordIncompatible">Les mots de passe ne coresspondent pas</string>
+    <string name="loginIncorrect">Combinaison mot de passse/identifiant inconnu !</string>
     <string name="notFound">User not found or multiple proposition</string>
     <!-- annonces -->
     <string name="title">Titre</string>
     <string name="nombreinvite">Nombre de places</string>
-    <string name="remainplace">Nombre de places Restantes</string>
+    <string name="remainplace">Nombre de places restantes</string>
     <string name="Price">Prix</string>
     <string name="address">Adresse</string>
     <string name="street">Voie</string>
@@ -46,7 +46,7 @@
     <string name="date">Date</string>
     <string name="menu">Menu</string>
     <string name="duration">Durée</string>
-    <string name="agebracket">Tranche d\'age souhaitée</string>
+    <string name="agebracket">Tranche d\'âge souhaitée</string>
     <string name="type">Type de cuisine</string>
     <string name="notes">Notes</string>
     <string name="pet">Présence d\'un animal</string>
