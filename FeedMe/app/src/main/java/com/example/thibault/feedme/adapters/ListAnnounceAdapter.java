@@ -34,13 +34,17 @@ public class ListAnnounceAdapter extends BaseAdapter {
         this.databaseHelper = FeedMeOpenDatabaseHelper.getHelper(c);
         this.announces = null;
         try {
+            // Recuperer toutes les offres en base
             this.announces = this.databaseHelper.getOffresDao().queryForAll();
         } catch (SQLException e) {
             Log.e("ListAnnounceAdapter", "failed to get Offres from database");
         }
     }
 
-    // Total number of things contained within the adapter
+    /**
+     * Retourne le nombre d'annonces
+     * @return le nombre d'annonces
+     */
     public int getCount() {
         return this.announces.size();
     }
@@ -58,37 +62,31 @@ public class ListAnnounceAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
-
-        View outputView = this.initComponant(convertView , position);
-
-
-
-
-
+        View outputView = this.initComponent(convertView , position);
         outputView.setId(position);
-
         return outputView;
     }
 
-
-    private View initComponant(View convertView, int position) {
-
+    /**
+     * Construction de la vue d'une offre dans la liste
+     * @param convertView
+     * @param position l'ID de l'offre dans la vue
+     * @return la vue construite
+     */
+    private View initComponent(View convertView, int position) {
         View outputView;
         TextView tvTitle;
         TextView tvAdresse;
         TextView tvTypecusine;
         TextView tvPrice;
         TextView tvRemainPlace;
+
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             outputView = convertView;
 
             LayoutInflater inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             outputView = inflater.inflate(R.layout.card_announce, null);
-
-
         } else {
             outputView = convertView;
         }
@@ -113,31 +111,28 @@ public class ListAnnounceAdapter extends BaseAdapter {
     }
 
     public long getOffreIdFromPosition(int position){
-
         return this.announces.get(position).getId();
     }
 
+    /**
+     * Retourne le nombre de places restantes pour une offre
+     * @param position ID de l'offre pour laquelle on calcule le nombre de places restantes
+     * @return le nombre de places restantes
+     */
     public int getRemainPlace(int position) {
-
         // on calcul le nombre de place restantes
         List<Reservation> reservations = null;
         try {
-
             reservations = this.databaseHelper.getReservationDao().queryBuilder().where().eq("offreId_id", announces.get(position)).query();
-
         } catch (SQLException e) {
             Log.e("ListAnnounceAdapter", "Failed to get Reservation on offre " + this.announces.get(position).getTitre() + " : " + e);
         }
 
         if (reservations != null) {
-
             int nbReservation = reservations.size();
             int remainPlace = this.announces.get(position).getNbPrsn() - nbReservation;
-
             return remainPlace;
-
         } else {
-
             Toast.makeText(this.mContext, R.string.reservationNotFound, Toast.LENGTH_SHORT);
         }
        return 0;

@@ -81,16 +81,14 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Offre.class);
             TableUtils.createTable(connectionSource, Reservation.class);
 
-
-
-
-
-
+            // Alimentation de la table PAYS
             this.getPaysDao().create(new Pays("FR", "France"));
             this.getPaysDao().create(new Pays("BE", "Belgique"));
 
+            // Alimentation de la table ROLE
             this.getRolesDao().create(new Role("ROLE_PARTICULIER"));
 
+            // Alimentation de la table TYPECUISINE
             this.getTypeCuisinesDao().create(new TypeCuisine("Cuisine régionale"));
             this.getTypeCuisinesDao().create(new TypeCuisine("Africaine"));
             this.getTypeCuisinesDao().create(new TypeCuisine("Steak house"));
@@ -105,7 +103,6 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
             this.getTypeCuisinesDao().create(new TypeCuisine("Savoyard"));
             this.getTypeCuisinesDao().create(new TypeCuisine("Alsacienne"));
             this.getTypeCuisinesDao().create(new TypeCuisine("Mexicaine"));
-
 
         } catch (SQLException e) {
             Log.e("DatabaseHelper", "Echec de la création de la database" +e);

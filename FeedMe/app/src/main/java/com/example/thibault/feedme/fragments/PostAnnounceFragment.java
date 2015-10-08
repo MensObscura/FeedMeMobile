@@ -100,14 +100,10 @@ public class PostAnnounceFragment extends Fragment {
 
         this.initAgeEditText();
 
-
         this.bConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (insertOffreInDatabase()) {
-
                     Toast.makeText(getActivity(), "Annonce Postée", Toast.LENGTH_SHORT).show();
                     manager = getActivity().getSupportFragmentManager();
                     transaction = manager.beginTransaction();
@@ -127,14 +123,12 @@ public class PostAnnounceFragment extends Fragment {
 
 
         //Date picker dialog
-
         View.OnClickListener onDateEntryClick = new View.OnClickListener() {
             public void onClick(View v) {
                 // Open a date piker
                 CreateDialog(0);
             }
         };
-
 
         this.calendar = Calendar.getInstance();
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -145,13 +139,14 @@ public class PostAnnounceFragment extends Fragment {
         this.ibCalendar.setOnClickListener(onDateEntryClick);
         this.etDate.setOnClickListener(onDateEntryClick);
 
-
         // Inflate the layout for this fragment
         return vPost;
     }
 
+    /**
+     * Initialisation du champ pour l'age de l'utilisateur
+     */
     private void initAgeEditText() {
-
         this.etAge.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -185,8 +180,10 @@ public class PostAnnounceFragment extends Fragment {
         });
     }
 
+    /**
+     * Initialisation de la liste des elements du fragment
+     */
     private void initListComponant() {
-
         this.neededComponants = new ArrayList<EditText>();
         //needed information
         this.neededComponants.add(etTitle);
@@ -197,14 +194,19 @@ public class PostAnnounceFragment extends Fragment {
         this.neededComponants.add(etCodePostal);
         this.neededComponants.add(etMenu);
         this.neededComponants.add(etDate);
-
     }
 
+    /**
+     * Initialisation des spinners du fragment
+     */
     private void initSpinner() {
         this.initSpinnerPays();
         this.initSpinnerTypeCuisine();
     }
 
+    /**
+     * Initialisation du spinner pour les types de cuisine
+     */
     private void initSpinnerTypeCuisine() {
         ArrayAdapter<String> adapter = null;
         List<String> list = new ArrayList<String>();
@@ -212,12 +214,14 @@ public class PostAnnounceFragment extends Fragment {
 
         FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
+        // On recupere tous les types de cuisine en base
         try {
             typeCuisines = database.getTypeCuisinesDao().queryForAll();
         } catch (SQLException e) {
             Log.e("PostAnnouceFragment", "Echec getting type de cuisine from db" + e);
         }
 
+        // Pour chaque type de cuisine, s'il y a, on ajoute le type dans le spinner
         if (typeCuisines != null) {
             if (typeCuisines.size() > 0) {
 
@@ -226,15 +230,12 @@ public class PostAnnounceFragment extends Fragment {
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, list);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
             } else {
                 Log.e("PostAnnouceFragment", "TypeCuisine List is empty");
             }
-
         } else {
             Log.e("PostAnnouceFragment", "TypeCuisine List is null");
         }
-
 
         this.sType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -247,11 +248,12 @@ public class PostAnnounceFragment extends Fragment {
 
             }
         });
-
         this.sType.setAdapter(adapter);
     }
 
-
+    /**
+     * Initialisation du spinner pour les pays
+     */
     private void initSpinnerPays() {
         ArrayAdapter<String> adapter = null;
         List<String> list = new ArrayList<String>();
@@ -259,12 +261,14 @@ public class PostAnnounceFragment extends Fragment {
 
         FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
+        // On recupere toutes les entrees dans la table PAYS
         try {
             pays = database.getPaysDao().queryForAll();
         } catch (SQLException e) {
             Log.e("PostAnnouceFragment", "Echec getting country from db" + e);
         }
 
+        // Pour chaque pays, si cette liste n'est pas nulle, on ajoute le nom du pays au spinner
         if (pays != null) {
             if (pays.size() > 0) {
 
@@ -273,11 +277,9 @@ public class PostAnnounceFragment extends Fragment {
                 }
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, list);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
             } else {
                 Log.e("PostAnnouceFragment", "Country List is empty");
             }
-
         } else {
             Log.e("PostAnnouceFragment", "Country List is null");
         }
@@ -294,10 +296,13 @@ public class PostAnnounceFragment extends Fragment {
 
             }
         });
-
         this.sPays.setAdapter(adapter);
     }
 
+    /**
+     * Verifie que l'utilisateur a bien choisi une valeur dans les spinners (Pays et TypeCuisine)
+     * @return True si la valeur des spinners a bien ete choisie
+     */
     public boolean formWellFill() {
         boolean wellFill = true;
 
@@ -318,15 +323,16 @@ public class PostAnnounceFragment extends Fragment {
             this.sType.setBackgroundColor(Color.RED);
 
         }
-
         return wellFill;
     }
 
+    /**
+     * Creation d'une nouvelle offre en base
+     * @return True si toutes les donnees ont ete inserees dans les tables, False sinon
+     */
     private boolean insertOffreInDatabase() {
         if (this.formWellFill()) {
-
             FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
-
 
             //On récupère toutes les données
             String titre = this.etTitle.getText().toString();
@@ -396,24 +402,18 @@ public class PostAnnounceFragment extends Fragment {
             Ville objetVille = new Ville(city, cp, objetPays);
             Adresse objetAdresse = new Adresse(street, objetVille);
 
-
             try {
                 Offre objetOffre = new Offre(creationOffre, titre, price, nbPlace, duration, dateRepas, objetAdresse, brief, menu, ageMin, ageMax, pets, objetTypeCusine, ((MainActivity) this.getActivity()).getCurrentUser());
 
                 //On insert tout dans la database
-
                 databaseHelper.getOffresDao().create(objetOffre);
                 Log.d("PostAnnounceFragment", objetOffre.toString());
             } catch (SQLException e) {
                 Log.e("PostAnnouceFragment", "Echec inserting offre in database : " + e);
                 return false;
             }
-
-
             return true;
-
         } else {
-
             Toast.makeText(this.getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
             return false;
         }

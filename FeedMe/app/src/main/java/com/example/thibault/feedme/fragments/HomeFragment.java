@@ -37,52 +37,43 @@ public class HomeFragment extends Fragment {
         bFindMeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 launchListMeal();
-
             }
         });
-
         return vHome;
     }
 
+    /**
+     * Selection "Proposer un repas" du menu d'accueil
+     */
     private void launchFromMeal() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+        Fragment currentFragment = manager.findFragmentByTag("fragment");
 
-        Fragment current = manager.findFragmentByTag("fragment");
+            // Remplacer le fragment courant par le fragment partager
+            PostAnnounceFragment fPost = new PostAnnounceFragment();
 
-
-                // Remplacer le fragment courant par le fragment partager
-                PostAnnounceFragment fPost = new PostAnnounceFragment();
-
-
-                if (current != null) {
-
-                    transaction.replace(current.getId(), fPost, "fragment");
-
-                    transaction.commit();
-                    getActivity().setTitle(getString(R.string.deposer));
-                }
-
-
+            if (currentFragment != null) {
+                transaction.replace(currentFragment.getId(), fPost, "fragment");
+                transaction.commit();
+                getActivity().setTitle(getString(R.string.deposer));
+            }
     }
-    private void launchListMeal() {
 
+    /**
+     * Selection "Rechercher un repas" du menu d'accueil
+     */
+    private void launchListMeal() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment current = manager.findFragmentByTag("fragment");
-
+        Fragment currentFragment = manager.findFragmentByTag("fragment");
 
         // Remplacer le fragment courant par le fragment partager
         ListAnnounceFragment fList = new ListAnnounceFragment();
 
-
-        if (current != null) {
-
-            transaction.replace(current.getId(), fList, "fragment");
-
+        if (currentFragment != null) {
+            transaction.replace(currentFragment.getId(), fList, "fragment");
             transaction.commit();
             getActivity().setTitle(getString(R.string.rechercher));
         }
