@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 public class LoginFragment extends Fragment {
 
-
     Button bValidate;
     EditText etName;
     EditText etPassword;
@@ -40,7 +39,6 @@ public class LoginFragment extends Fragment {
         View vLogin = inflater.inflate(R.layout.fragment_login, container, false);
 
         //Instanciate view
-
         etName = (EditText) vLogin.findViewById(R.id.ETid);
         etPassword = (EditText) vLogin.findViewById(R.id.ETloginpassword);
         bValidate = (Button) vLogin.findViewById(R.id.Bvalid);
@@ -56,10 +54,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
         // verification email valid
         this.etName.addTextChangedListener(new TextWatcher(){
-
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -85,16 +81,12 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
-
         return vLogin;
     }
 
     private void launchApp() throws SQLException {
 
-
         if (authentification()) {
-
-
             Toast.makeText(getActivity(), "Hi, congrat you are in !", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -105,9 +97,12 @@ public class LoginFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Verifie si la combinaison login/password existe en base
+     * @return True si l'utilisateur est reconnu, False sinon
+     * @throws SQLException
+     */
     public boolean authentification() throws SQLException {
-
         FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
         String email = etName.getText().toString();
@@ -117,15 +112,22 @@ public class LoginFragment extends Fragment {
         //si champ non vides on verifie les ID dans la base
         if (email.length() > 0 && password.length() > 0) {
 
-
             List<User> users = database.getUsersDao().queryBuilder().where().eq("email", email).query();
+            List<User> users2 = database.getUsersDao().queryForAll();
 
+            Log.i("LOGIN", "\n\n********************* LOGIN *********************\n\n");
+            /// DEBUG
+            for(User u : users2) {
+                Log.i("Login", "USER : "+u.toString());
+            }
+            if(users2.isEmpty()){
+                Log.i("Login", "Pas d'utilisateurs en base =(");
+            }
 
             if (users.size() == 1) {
-
                 List<Authentification> auth = database.getAuthentificationDao().queryBuilder().where().eq("idUser_id", users.get(0)).and().eq("password", password).query();
                 if (auth.size() == 1) {
-                    return true;
+                    return true; // On a bien trouvé un seul utilisateur
                 }
             }
             Toast.makeText(getActivity(), R.string.loginIncorrect, Toast.LENGTH_SHORT).show();

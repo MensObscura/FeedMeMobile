@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linearMain);
         this.setFragment(mainLayout);
 
+        // Initialisation des composants du menu
+        this.initComponents();
 
-        this.initComponants();
-
-
+        // Construction du contenu du menu
         this.fillMenu();
 
         // On sauvegarde le current user
@@ -69,17 +69,22 @@ public class MainActivity extends AppCompatActivity {
         } catch (SQLException e) {
             Log.e("MainActivity", "Fail gettingUser : " + e);
         }
-
-
     }
 
-    private void initComponants() {
-
+    /**
+     * Initialisation des composants :
+     * layout du menu
+     * liste des elements du menu
+     */
+    private void initComponents() {
         this.menuLayout = (DrawerLayout) findViewById(R.id.menu_layout);
         this.menuElementsList = (ListView) findViewById(R.id.menu_elements);
     }
 
 
+    /**
+     * Construction du contenu du menu
+     */
     private void fillMenu() {
         // set a custom shadow that overlays the main content when the drawer opens
         this.menuLayout.setDrawerShadow(R.drawable.drawer_shadow,
@@ -101,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         //On set l'adapter
         this.menuElementsList.setAdapter(adapter);
 
+        // Evenement au clic : selection de l'element du menu
         this.menuElementsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -115,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
         this.initToggle();
 
         this.menuLayout.setDrawerListener(menuToggle);
-
-
     }
 
     private void initToggle() {
@@ -140,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void setFragment(LinearLayout mainLayout) {
         // on fait l'ajout du fragment dans le layout donné
         manager = getSupportFragmentManager();
@@ -151,28 +154,28 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    /**
+     * Retourne l'utilisateur courant
+     * @return User - l'utilisateur courant
+     * @throws SQLException
+     */
     public User getCurrentUser() throws SQLException {
-
         if (currentUser == null) {
             FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this);
 
-
             //Getting Current User
-
             String email = this.getIntent().getStringExtra("HOME_LOGIN");
 
+            // Liste des utilisateurs en base
             List<User> users = database.getUsersDao().queryBuilder().where().eq("email", email).query();
 
-
+            // Si on trouve bien un seul utilisateur, alors on le retourne
             if (users.size() == 1) {
-
                 return users.get(0);
-
-
             }
 
+            // Sinon il n'est pas trouve
             Toast.makeText(this, R.string.notFound, Toast.LENGTH_LONG).show();
-
         } else {
             return this.currentUser;
         }
@@ -212,65 +215,56 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Selectionne un element du menu et remplace le fragment actuel par celui choisi
+     * @param position la position de l'element dans le menu
+     */
     private void selectItem(int position) {
-
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
-        Fragment current = manager.findFragmentByTag("fragment");
+        Fragment currentFragment = manager.findFragmentByTag("fragment");
 
         switch (position) {
             // Item 'Profil' du menu
             case 0:
                 // Remplacer le fragment courant par le fragment profil
                 ProfilFragment fProfil = new ProfilFragment();
-
-
-                if (current != null) {
-
-                    transaction.replace(current.getId(), fProfil, "fragment");
-
+                // si le fragment courant existe
+                if (currentFragment != null) {
+                    transaction.replace(currentFragment.getId(), fProfil, "fragment");
                     transaction.commit();
                 }
-
-
                 break;
+
             // Item 'Proposer une offre' du menu
             case 1:
-                // Remplacer le fragment courant par le fragment profil
+                // Remplacer le fragment courant par le fragment PostAnnounce
                 PostAnnounceFragment fPostAnnounce = new PostAnnounceFragment();
-
-
-                if (current != null) {
-
-                    transaction.replace(current.getId(), fPostAnnounce, "fragment");
-
+                // si le fragment existe
+                if (currentFragment != null) {
+                    transaction.replace(currentFragment.getId(), fPostAnnounce, "fragment");
                     transaction.commit();
                 }
-
                 break;
+
             // Item 'Lister les offres' du menu
             case 2:
                 ListAnnounceFragment fListAnnounce = new ListAnnounceFragment();
 
-
-                if (current != null) {
-
-                    transaction.replace(current.getId(), fListAnnounce, "fragment");
-
+                if (currentFragment != null) {
+                    transaction.replace(currentFragment.getId(), fListAnnounce, "fragment");
                     transaction.commit();
                 }
-
                 break;
+
             // Item 'déconnexion' du menu
             case 3:
-
                 Intent intent = new Intent(this, HomeLoginActivity.class);
                 startActivity(intent);
                 this.finish();
                 Toast.makeText(this, "Bybye", Toast.LENGTH_LONG).show();
                 break;
             default:
-
         }
 
         menuElementsList.setItemChecked(position, true);
@@ -288,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
      * When using the ActionBarDrawerToggle, you must call it during
      * onPostCreate() and onConfigurationChanged()...
      */
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -309,24 +302,26 @@ public class MainActivity extends AppCompatActivity {
 
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
-        Fragment current = manager.findFragmentByTag("fragment");
+        Fragment currentFragment = manager.findFragmentByTag("fragment");
 
+        // Si le fragment courant existe, qu'il n'est pas celui de l'accueil
+        // et n'est pas celuui de la liste des annonces
+        if (currentFragment != null && !currentFragment.getClass().equals(HomeFragment.class)
+                && !currentFragment.getClass().equals(ListAnnounceFragment.class)) {
 
-        if (current != null && !current.getClass().equals(HomeFragment.class) && !current.getClass().equals(ListAnnounceFragment.class)) {
-
-
-            // Remplacer le fragment courant par le fragment Home
+            // On remplace le fragment courant par le fragment Home
             HomeFragment fHome = new HomeFragment();
-            transaction.replace(current.getId(), fHome, "fragment");
+            transaction.replace(currentFragment.getId(), fHome, "fragment");
 
             transaction.commit();
             setTitle(getString(R.string.app_name));
-        } else if (current != null && !current.getClass().equals(HomeFragment.class)) {
+        }
+        // Sinon si le fragment existe et qu'il n'est pas celui de l'accueil
+        else if (currentFragment != null && !currentFragment.getClass().equals(HomeFragment.class)) {
 
-
-            // Remplacer le fragment courant par le fragment List
+            // On remplace le fragment courant par le fragment List
             ListAnnounceFragment fList = new ListAnnounceFragment();
-            transaction.replace(current.getId(), fList, "fragment");
+            transaction.replace(currentFragment.getId(), fList, "fragment");
 
             transaction.commit();
             setTitle(getString(R.string.rechercher));
@@ -344,9 +339,8 @@ public class MainActivity extends AppCompatActivity {
             transaction = manager.beginTransaction();
             Fragment current = manager.findFragmentByTag("fragment");
 
-
-            if (current != null && !current.getClass().equals(HomeFragment.class) && !current.getClass().equals(BookAnnounceFragment.class)) {
-
+            if (current != null && !current.getClass().equals(HomeFragment.class)
+                    && !current.getClass().equals(BookAnnounceFragment.class)) {
 
                 // Remplacer le fragment courant par le fragment home
                 HomeFragment fHome = new HomeFragment();
@@ -358,16 +352,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if (current != null && !current.getClass().equals(HomeFragment.class)) {
 
-
                 // Remplacer le fragment courant par le fragment List
                 ListAnnounceFragment fList = new ListAnnounceFragment();
                 transaction.replace(current.getId(), fList, "fragment");
                 setTitle(getString(R.string.rechercher));
                 transaction.commit();
-
             }
-
-
         }
         return super.onKeyDown(keyCode, event);
     }

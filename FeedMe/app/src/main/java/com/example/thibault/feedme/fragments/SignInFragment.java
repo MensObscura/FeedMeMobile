@@ -62,7 +62,6 @@ public class SignInFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         // Inflate the layout for this fragment
         View vSignIn = inflater.inflate(R.layout.fragment_signin, container, false);
 
@@ -83,7 +82,6 @@ public class SignInFragment extends Fragment {
             }
         });
 
-
         //instanciation des inputs (editext)
         this.etName = (EditText) vSignIn.findViewById(R.id.ETname);
         this.etLastName = (EditText) vSignIn.findViewById(R.id.ETlastname);
@@ -103,7 +101,6 @@ public class SignInFragment extends Fragment {
 
         //Verifcation email valid
         this.etEmail.addTextChangedListener(new TextWatcher() {
-
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -131,17 +128,12 @@ public class SignInFragment extends Fragment {
             }
         });
 
-
-
-
         //Intanciation de l'image button calendrier et préparation des entrées de dates
-
         this.ibCalendar = (ImageButton) vSignIn.findViewById(R.id.IBCalendar);
         this.calendar = Calendar.getInstance();
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
         this.month = calendar.get(Calendar.MONTH);
         this.year = calendar.get(Calendar.YEAR);
-
 
         //OnClick sur champs et image de date.
         View.OnClickListener onDateEntryClick = new View.OnClickListener() {
@@ -159,8 +151,6 @@ public class SignInFragment extends Fragment {
     }
 
     private void launchApp() throws SQLException {
-
-
         this.database = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
         String nom = this.etLastName.getText().toString();
@@ -176,9 +166,7 @@ public class SignInFragment extends Fragment {
             if (e.getText().toString().trim().length() == 0) {
                 this.allowConfirm = false;
                 e.setBackgroundColor(Color.RED);
-
             }
-
         }
         // si le mot de passe et la confirmation sont identique et que tout les champs sont remplis
         if (password.equals(confirm) && allowConfirm) {
@@ -187,7 +175,6 @@ public class SignInFragment extends Fragment {
                 //On créé un user et sont role, puis une nouvelle authentification et on lance l'app
                 User user = new User(nom, email);
                 this.database.getUsersDao().create(user);
-
 
                 this.database.getParticuliersDao().create(new Particulier(prenom, birth, user));
 
@@ -198,7 +185,6 @@ public class SignInFragment extends Fragment {
                     role = new Role("ROLE_PARTICULIER");
                     this.database.getRolesDao().create(role);
                 }
-
 
                 this.database.getAuthentificationDao().create(new Authentification(password, role, user));
 
@@ -220,12 +206,8 @@ public class SignInFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
             }
-
-
         }
-
     }
-
 
     protected void CreateDialog(int id) {
         DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
@@ -238,11 +220,7 @@ public class SignInFragment extends Fragment {
             }
         };
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), datePickerListener, this.year, this.month, this.day);
-
-
         datePickerDialog.show();
     }
-
-
 }
 

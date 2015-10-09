@@ -44,30 +44,22 @@ public class ProfilFragment extends Fragment {
 
         //Set value in text view;
         this.setValue();
-
-
         return vProfil;
     }
 
     public void setValue() {
-
         try {
             User user = ((MainActivity) this.getActivity()).getCurrentUser();
             Particulier particulier;
 
             Calendar calendar = Calendar.getInstance();
 
-
             FeedMeOpenDatabaseHelper database = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
-
             //Getting Current Particulier
-
             List<Particulier> particuliers = database.getParticuliersDao().queryBuilder().where().eq("idUser_id", user).query();
 
-
             if (particuliers.size() == 1) {
-
                 particulier = particuliers.get(0);
                 calendar.setTime(particulier.getDateNaissance());
                 int age = Calendar.getInstance().get(Calendar.YEAR) - calendar.get(calendar.YEAR);
@@ -77,17 +69,11 @@ public class ProfilFragment extends Fragment {
                 this.tvPrenom.setText(particulier.getPrenom());
                 this.tvEmail.setText(user.getEmail());
                 this.tvAge.setText("" + age);
-
             } else {
-
                 Toast.makeText(this.getActivity(), R.string.notFound, Toast.LENGTH_LONG).show();
             }
-
-
         } catch (SQLException e) {
             Log.e("ProfilFragment", "GettingUserFail : " + e);
         }
-
     }
-
 }

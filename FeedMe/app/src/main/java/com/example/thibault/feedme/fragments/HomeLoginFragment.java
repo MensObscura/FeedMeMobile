@@ -27,8 +27,7 @@ public class HomeLoginFragment extends Fragment {
         bLogin = (Button) vLogin.findViewById(R.id.Blogin);
         bSignIn = (Button) vLogin.findViewById(R.id.Bsignin);
 
-
-
+        // Au clic sur le bouton de connexion, on affiche le fragment de connexion
         bLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Go to the Login
@@ -36,6 +35,7 @@ public class HomeLoginFragment extends Fragment {
             }
         });
 
+        // Au clic sur le bouton d'inscription, on affiche le fragment d'inscription
         bSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Go to the Login Page
@@ -46,21 +46,17 @@ public class HomeLoginFragment extends Fragment {
         return vLogin;
     }
 
-
     public static void setMyOnClickListener(HomeLoginActivity myOnClickListener) {
         HomeLoginFragment.myOnClickListener = myOnClickListener;
     }
 
+    /**
+     * Affichage du fragment de connexion sur le premier ecran
+     */
     public void login() {
-
-
-
         LoginFragment fragmentLogin = new LoginFragment();
         myOnClickListener.onMySignal(R.id.home, fragmentLogin);
-
-
     }
-
 
     /**
      * Intent intent = new Intent(this, MainActivity.class);
@@ -69,9 +65,11 @@ public class HomeLoginFragment extends Fragment {
      * startActivity(intent);
      * this.finish();
      */
+
+    /**
+     * Affichage du fragment d'inscription depuis le premier ecran
+     */
     public void signIn() {
-
-
         SignInFragment fragmentSignIn = new SignInFragment();
         myOnClickListener.onMySignal(R.id.home, fragmentSignIn);
     }

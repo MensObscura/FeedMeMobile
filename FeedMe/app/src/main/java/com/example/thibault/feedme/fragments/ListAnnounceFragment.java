@@ -34,43 +34,34 @@ public class ListAnnounceFragment extends Fragment {
         // Inflate the layout for this fragment
         View fList = inflater.inflate(R.layout.fragment_list_announce, container, false);
 
-
         announces = (GridView) fList.findViewById(R.id.gridAnnounce);
-
         announces.setAdapter(new ListAnnounceAdapter(getActivity()));
-
 
         announces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                                             @Override
-                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+             @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                                                 manager = getActivity().getSupportFragmentManager();
-                                                 transaction = manager.beginTransaction();
-                                                 Fragment current = manager.findFragmentByTag("fragment");
+                 manager = getActivity().getSupportFragmentManager();
+                 transaction = manager.beginTransaction();
+                 Fragment currentFragment = manager.findFragmentByTag("fragment");
 
+                 if (currentFragment != null) {
 
-                                                 if (current != null) {
+                     // Remplacer le fragment courant par le fragment reserver
+                     BookAnnounceFragment fBook = new BookAnnounceFragment();
+                     Bundle bundle = new Bundle();
+                     long idOffre = ((ListAnnounceAdapter) announces.getAdapter()).getOffreIdFromPosition(position);
+                     bundle.putString("offre", "" + idOffre);
+                     fBook.setArguments(bundle);
+                     transaction.replace(currentFragment.getId(), fBook, "fragment");
 
-
-                                                     // Remplacer le fragment courant par le fragment reserver
-                                                     BookAnnounceFragment fBook = new BookAnnounceFragment();
-                                                     Bundle bundle = new Bundle();
-                                                     long idOffre = ((ListAnnounceAdapter)announces.getAdapter()).getOffreIdFromPosition(position);
-                                                     bundle.putString("offre",""+idOffre);
-                                                     fBook.setArguments(bundle);
-                                                     transaction.replace(current.getId(), fBook, "fragment");
-
-                                                     transaction.commit();
-                                                     getActivity().setTitle(getString(R.string.reservation));
-                                                 }
-                                             }
-                                         }
-        );
+                     transaction.commit();
+                     getActivity().setTitle(getString(R.string.reservation));
+                 }
+             }
+        });
 
         return fList;
     }
-
-
-
 }

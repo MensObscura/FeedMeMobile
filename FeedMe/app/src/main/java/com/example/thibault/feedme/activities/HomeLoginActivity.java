@@ -28,13 +28,7 @@ public class HomeLoginActivity extends FragmentActivity implements MyOnClickList
         FeedMeOpenDatabaseHelper.getHelper(this);
         //Fragment
         HomeLoginFragment.setMyOnClickListener(this);
-
-
-
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,22 +48,17 @@ public class HomeLoginActivity extends FragmentActivity implements MyOnClickList
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onMySignal(int lNum, Fragment fragment) {
-
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-
-
 
         //replace your current container being most of the time as FrameLayout
         transaction.replace(lNum,fragment);
         transaction.commit();
     }
-
 
 }
