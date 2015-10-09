@@ -85,7 +85,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
 
-
+            // fill database
             this.getPaysDao().create(new Pays("FR", "France"));
             this.getPaysDao().create(new Pays("BE", "Belgique"));
 
@@ -146,6 +146,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @throws SQLException
      */
 
+    //Getting Adresse
     public Dao<Adresse, Long> getAdressesDao() throws SQLException {
         if (adresseDao == null) {
             adresseDao = getDao(Adresse.class);
@@ -153,6 +154,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return adresseDao;
     }
 
+    //Getting Authentication
     public Dao<Authentification, Long> getAuthentificationDao() throws SQLException {
         if (authentificationDao == null) {
             authentificationDao = getDao(Authentification.class);
@@ -160,6 +162,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return authentificationDao;
     }
 
+    //Getting particulier
     public Dao<Particulier, Long> getParticuliersDao() throws SQLException {
         if (particuliersDao == null) {
             particuliersDao = getDao(Particulier.class);
@@ -167,6 +170,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return particuliersDao;
     }
 
+    //getting offre
     public Dao<Offre, Long> getOffresDao() throws SQLException {
         if (offresDao == null) {
             offresDao = getDao(Offre.class);
@@ -174,6 +178,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return offresDao;
     }
 
+    //Getting Pays
     public Dao<Pays, Long> getPaysDao() throws SQLException {
         if (paysDao == null) {
             paysDao = getDao(Pays.class);
@@ -181,6 +186,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return paysDao;
     }
 
+    //Getting Reservation
     public Dao<Reservation, Long> getReservationDao() throws SQLException {
         if (reservationDao == null) {
             reservationDao = getDao(Reservation.class);
@@ -188,13 +194,14 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return reservationDao;
     }
 
+    // getting Role
     public Dao<Role, Long> getRolesDao() throws SQLException {
         if (roleDao == null) {
             roleDao = getDao(Role.class);
         }
         return roleDao;
     }
-
+    //getting typeCuisine
     public Dao<TypeCuisine, Long> getTypeCuisinesDao() throws SQLException {
         if (typeCuisinesDao == null) {
             typeCuisinesDao = getDao(TypeCuisine.class);
@@ -202,7 +209,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return typeCuisinesDao;
     }
 
-
+    // Getting user
     public Dao<User, Long> getUsersDao() throws SQLException {
         if (userssDao == null) {
             userssDao = getDao(User.class);
@@ -210,6 +217,7 @@ public class FeedMeOpenDatabaseHelper extends OrmLiteSqliteOpenHelper {
         return userssDao;
     }
 
+    //getting ville
     public Dao<Ville, Long> getVillesDao() throws SQLException {
         if (villesDao == null) {
             villesDao = getDao(Ville.class);

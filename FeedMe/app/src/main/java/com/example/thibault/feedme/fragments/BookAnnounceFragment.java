@@ -61,58 +61,72 @@ public class BookAnnounceFragment extends Fragment {
 
         String idOffre = (String) getArguments().get("offre");
 
+        //fill components
         this.fillComponants(idOffre);
 
-
-        this.bConfirm.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View v) {
-
-                                                 if (etBookPlace.getText().toString().trim().length() == 0) {
-                                                     Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
-                                                     etBookPlace.setBackgroundColor(Color.RED);
-                                                 } else if (currentOffre != null) {
-
-                                                     FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(getActivity());
-
-                                                     try {
-                                                         //On crée autant de reservation que le nombre de place entrée
-                                                         Log.d("BookAnnounceFragment", "toc");
-                                                         for (int i = 0; i < Integer.parseInt(etBookPlace.getText().toString()); i++) {
-                                                             Log.d("BookAnnounceFragment", "" + i);
-                                                             databaseHelper.getReservationDao().create(new Reservation(currentOffre, ((MainActivity) getActivity()).getCurrentUser(), Calendar.getInstance().getTime()));
-                                                         }
-                                                         Log.d("BookAnnounceFragment", "out");
-                                                         List<Reservation> list = databaseHelper.getReservationDao().queryForAll();
-
-                                                     } catch (SQLException e) {
-                                                         Log.e("BookAnnounceFragment", "Failed to store reservation in Database : " + e);
-                                                         return;
-                                                     }
-
-                                                     Toast.makeText(getActivity(), "Couvert Réservé", Toast.LENGTH_SHORT).show();
-
-                                                     manager = getActivity().getSupportFragmentManager();
-                                                     transaction = manager.beginTransaction();
-                                                     Fragment current = manager.findFragmentByTag("fragment");
-
-                                                     // Remplacer le fragment courant par le fragment home
-                                                     HomeFragment fHome = new HomeFragment();
-                                                     transaction.replace(current.getId(), fHome, "fragment");
-
-                                                     transaction.commit();
-                                                     getActivity().setTitle(getString(R.string.app_name));
-
-                                                 }
-
-                                             }
-                                         }
-
-        );
+        //Verification des champs et ajout dans database
+        this.bConfirm.setOnClickListener(this.createFormOnClickListener());
         return vBook;
     }
 
+    private View.OnClickListener createFormOnClickListener() {
+        View.OnClickListener formOnclick =new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (etBookPlace.getText().toString().trim().length() == 0) {
+                    Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
+                    etBookPlace.setBackgroundColor(Color.RED);
+                } else if (currentOffre != null) {
+
+                    FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(getActivity());
+
+                    try {
+                        //On crée autant de reservation que le nombre de place entrée
+                        Log.d("BookAnnounceFragment", "toc");
+                        for (int i = 0; i < Integer.parseInt(etBookPlace.getText().toString()); i++) {
+                            Log.d("BookAnnounceFragment", "" + i);
+                            databaseHelper.getReservationDao().create(new Reservation(currentOffre, ((MainActivity) getActivity()).getCurrentUser(), Calendar.getInstance().getTime()));
+                        }
+                        Log.d("BookAnnounceFragment", "out");
+                        List<Reservation> list = databaseHelper.getReservationDao().queryForAll();
+
+                    } catch (SQLException e) {
+                        Log.e("BookAnnounceFragment", "Failed to store reservation in Database : " + e);
+                        return;
+                    }
+
+                    Toast.makeText(getActivity(), "Couvert Réservé", Toast.LENGTH_SHORT).show();
+
+                   setFragment();
+
+
+                }
+
+            }
+
+
+
+
+        };
+        return formOnclick;
+    }
+
+    //On set le fragment home
+    private void setFragment() {
+        manager = getActivity().getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        Fragment current = manager.findFragmentByTag("fragment");
+
+        // Remplacer le fragment courant par le fragment home
+        HomeFragment fHome = new HomeFragment();
+        transaction.replace(current.getId(), fHome, "fragment");
+
+        transaction.commit();
+        getActivity().setTitle(getString(R.string.app_name));
+    }
+
+    //on init les composant
     private void initComponants(View vBook) {
 
         this.bConfirm = (Button) vBook.findViewById(R.id.Bconfirm_book);
@@ -162,12 +176,13 @@ public class BookAnnounceFragment extends Fragment {
             this.tvPets.setText("Animaux de compagnie : " + animaux);
             this.tvBrief.setText(offre.getNotes());
             this.tvTotalPlaces.setText(remainPlaces + "");
-            this.defineEtBookPlace(remainPlaces);
+            this.defineETBookPlace(remainPlaces);
         }
 
     }
 
-    private void defineEtBookPlace(final int remainPalces) {
+    //On definit le text watcher de l'editText reservation : nb place
+    private void defineETBookPlace(final int remainPlaces) {
 
         this.etBookPlace.addTextChangedListener(new TextWatcher() {
             @Override
@@ -183,8 +198,8 @@ public class BookAnnounceFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
-                    if (Integer.parseInt(s.toString()) > remainPalces) {
-                        etBookPlace.setText(remainPalces + "");
+                    if (Integer.parseInt(s.toString()) > remainPlaces) {
+                        etBookPlace.setText(remainPlaces + "");
                         Toast.makeText(getActivity(), R.string.mustbeInferiorOrEqual, Toast.LENGTH_SHORT).show();
                     }
                     etBookPlace.setBackgroundColor(etBookPlace.getDrawingCacheBackgroundColor());
@@ -197,6 +212,7 @@ public class BookAnnounceFragment extends Fragment {
         });
     }
 
+    // get les places restantes
     private int getRemainPlaces(Offre offre) {
 
         FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(getActivity());
@@ -226,7 +242,7 @@ public class BookAnnounceFragment extends Fragment {
 
     }
 
-
+    // on get le particulier correspondant au user current
     private Particulier getCreator(Offre offre) {
         FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(getActivity());
 
@@ -246,7 +262,7 @@ public class BookAnnounceFragment extends Fragment {
             return null;
         }
     }
-
+    //getting clicked offre
     private Offre getOffre(String idOffre) {
 
         FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(getActivity());

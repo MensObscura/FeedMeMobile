@@ -75,6 +75,7 @@ public class ListAnnounceAdapter extends BaseAdapter {
 
     private View initComponant(View convertView, int position) {
 
+        //define compounant
         View outputView;
         TextView tvTitle;
         TextView tvAdresse;
@@ -92,17 +93,21 @@ public class ListAnnounceAdapter extends BaseAdapter {
         } else {
             outputView = convertView;
         }
+
+        //init component
         tvTitle = (TextView) outputView.findViewById(R.id.TVcard_title);
         tvAdresse = (TextView) outputView.findViewById(R.id.TVcard_ville);
         tvPrice = (TextView) outputView.findViewById(R.id.TVcard_price);
         tvTypecusine = (TextView) outputView.findViewById(R.id.TVcard_type);
         tvRemainPlace = (TextView) outputView.findViewById(R.id.TVcard_remain_place);
 
+        // fill component
         tvTitle.setText(this.announces.get(position).getTitre());
         tvAdresse.setText(this.announces.get(position).getIdAdress().getVille().getNom());
-        tvPrice.setText(this.announces.get(position).getPrix() + "");
+        tvPrice.setText(this.announces.get(position).getPrix() + " €");
         tvTypecusine.setText(this.announces.get(position).getTypeCuisine().getTypeCuisine());
 
+        //verifing remain places
         int remainPlace = this.getRemainPlace(position);
         if (remainPlace > 0) {
             tvRemainPlace.setText("" + remainPlace);
@@ -130,7 +135,7 @@ public class ListAnnounceAdapter extends BaseAdapter {
         }
 
         if (reservations != null) {
-
+            // calculating nb remain place
             int nbReservation = reservations.size();
             int remainPlace = this.announces.get(position).getNbPrsn() - nbReservation;
 
