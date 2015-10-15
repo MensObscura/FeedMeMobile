@@ -209,6 +209,7 @@ public class SignInFragment extends Fragment {
         }
     }
 
+	//Ici encore on vous laisse le choix dans la date.
     protected void CreateDialog(int id) {
         DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int selectedYear,

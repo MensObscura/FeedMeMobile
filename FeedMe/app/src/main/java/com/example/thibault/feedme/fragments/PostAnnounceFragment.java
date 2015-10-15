@@ -419,7 +419,7 @@ public class PostAnnounceFragment extends Fragment {
         }
     }
 
-
+	// Création de la dialog pour selectionner la date
     protected void CreateDialog(int id) {
         DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int selectedYear,
