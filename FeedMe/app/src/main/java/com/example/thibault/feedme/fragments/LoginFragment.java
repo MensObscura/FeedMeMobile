@@ -72,11 +72,10 @@ public class LoginFragment extends Fragment {
                 boolean valid = Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$",s);
 
                 if(valid){
-                    etName.setBackgroundColor(etName.getDrawingCacheBackgroundColor());
+                    etName.setTextColor(Color.BLACK);
                     bValidate.setEnabled(true);
                 }else{
-                    etName.setBackgroundColor(Color.RED);
-                  //  Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
+                    etName.setTextColor(Color.RED);
                     bValidate.setEnabled(false);
                 }
             }
@@ -136,10 +135,10 @@ public class LoginFragment extends Fragment {
             Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
 
             if (password.isEmpty()) {
-                this.etPassword.setBackgroundColor(Color.RED);
+                this.etPassword.setHintTextColor(Color.RED);
             }
             if (email.isEmpty()){
-                this.etName.setBackgroundColor(Color.RED);
+                this.etName.setHintTextColor(Color.RED);
             }
         }
         return false;

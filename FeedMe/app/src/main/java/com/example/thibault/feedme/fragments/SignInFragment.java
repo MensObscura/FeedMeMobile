@@ -117,12 +117,11 @@ public class SignInFragment extends Fragment {
                 boolean valid = Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$", s);
 
                 if (valid) {
-                    etEmail.setBackgroundColor(etEmail.getDrawingCacheBackgroundColor());
+                    etEmail.setHintTextColor(Color.BLACK);
                     bValidate.setEnabled(true);
 
                 } else {
-                    etEmail.setBackgroundColor(Color.RED);
-                    // Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
+                    etEmail.setHintTextColor(Color.RED);
                     bValidate.setEnabled(false);
                 }
             }
@@ -165,7 +164,7 @@ public class SignInFragment extends Fragment {
         for (EditText e : this.editable) {
             if (e.getText().toString().trim().length() == 0) {
                 this.allowConfirm = false;
-                e.setBackgroundColor(Color.RED);
+                e.setHintTextColor(Color.RED);;
             }
         }
         // si le mot de passe et la confirmation sont identique et que tout les champs sont remplis
@@ -202,7 +201,8 @@ public class SignInFragment extends Fragment {
             // Si pas de champs de vide, alors on signal que le mot de passe et la confirmation sont différents, sinon on signal les champs vides
             if (allowConfirm) {
                 Toast.makeText(getActivity(), R.string.passwordIncompatible, Toast.LENGTH_SHORT).show();
-                etPassword.setBackgroundColor(Color.RED);
+                etPassword.setTextColor(Color.RED);
+                etConfirmPassword.setTextColor(Color.RED);
             } else {
                 Toast.makeText(getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
             }

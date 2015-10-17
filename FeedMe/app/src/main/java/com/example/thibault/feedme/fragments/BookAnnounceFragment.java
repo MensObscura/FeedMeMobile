@@ -154,6 +154,8 @@ public class BookAnnounceFragment extends Fragment {
         Particulier particulier = this.getCreator(offre);
 
         //On remplit les champs
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(offre.getDateRepas());
 
         if (offre != null && particulier != null) {
             this.currentOffre = offre;
@@ -163,7 +165,7 @@ public class BookAnnounceFragment extends Fragment {
             this.tvNameAuthor.setText(offre.getIdUser().getNom() + " " + particulier.getPrenom());
             this.tvAddress.setText(offre.getIdAdress().getVoie() + "\n" + offre.getIdAdress().getVille().getCodePostal() + " " + offre.getIdAdress().getVille().getNom() + "\n" + offre.getIdAdress().getVille().getPays().getNom());
             this.tvPrice.setText(offre.getPrix() + " €");
-            this.tvDate.setText(offre.getDateRepas().toString());
+            this.tvDate.setText("Le " + cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR)+" à "+ cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+"");
             this.tvMenu.setText(offre.getMenu());
             this.tvRemainPlaces.setText(remainPlaces == 0 ? "Complet" : remainPlaces + "");
             if (remainPlaces == 0) {

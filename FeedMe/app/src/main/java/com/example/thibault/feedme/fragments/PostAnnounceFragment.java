@@ -215,13 +215,15 @@ public class PostAnnounceFragment extends Fragment {
                     int min = Integer.parseInt(ages[0]);
                     int max = Integer.parseInt(ages[1]);
                     if (max > min) {
-                        etAge.setBackgroundColor(etAge.getDrawingCacheBackgroundColor());
+                        etAge.setHintTextColor(Color.BLACK);
+                        etAge.setTextColor(Color.BLACK);
                         bConfirm.setEnabled(true);
                     } else {
                         Toast.makeText(getActivity(), "max must be gretter than min", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    etAge.setBackgroundColor(Color.RED);
+                    etAge.setHintTextColor(Color.RED);
+                    etAge.setTextColor(Color.RED);
                     bConfirm.setEnabled(false);
                 }
             }
@@ -357,7 +359,7 @@ public class PostAnnounceFragment extends Fragment {
 
         for (EditText e : neededComponants) {
             if (e.getText().toString().trim().length() == 0) {
-                e.setBackgroundColor(Color.RED);
+                e.setHintTextColor(Color.RED);
                 wellFill = false;
             }
         }
@@ -454,6 +456,7 @@ public class PostAnnounceFragment extends Fragment {
 
 
             objetOffre = new Offre(creationOffre, titre, price, nbPlace, duration, dateRepas, objetAdresse, brief, menu, ageMin, ageMax, pets, objetTypeCusine, ((MainActivity) this.getActivity()).getCurrentUser());
+
             //On insert tout dans la database
             databaseHelper.getOffresDao().create(objetOffre);
             Log.d("PostAnnounceFragment", objetOffre.toString());
