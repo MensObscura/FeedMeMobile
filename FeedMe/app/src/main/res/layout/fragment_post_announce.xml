@@ -146,7 +146,7 @@
                     android:textColor="#000000"
                     android:textSize="14dip" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/ETcity"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"

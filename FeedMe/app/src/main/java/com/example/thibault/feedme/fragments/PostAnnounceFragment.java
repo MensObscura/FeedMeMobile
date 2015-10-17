@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -52,7 +53,7 @@ public class PostAnnounceFragment extends Fragment {
     private EditText etNbPlaces;
     private EditText etPrice;
     private EditText etStreet;
-    private EditText etCity;
+    private AutoCompleteTextView etCity;
     private EditText etCodePostal;
     private Spinner sPays;
     private EditText etMenu;
@@ -86,7 +87,7 @@ public class PostAnnounceFragment extends Fragment {
         this.etNbPlaces = (EditText) vPost.findViewById((R.id.ETnbpeople));
         this.etPrice = (EditText) vPost.findViewById(R.id.ETprice);
         this.etStreet = (EditText) vPost.findViewById(R.id.ETstreet);
-        this.etCity = (EditText) vPost.findViewById(R.id.ETcity);
+        this.etCity = (AutoCompleteTextView) vPost.findViewById(R.id.ETcity);
         this.etCodePostal = (EditText) vPost.findViewById(R.id.ETcp);
         this.sPays = (Spinner) vPost.findViewById(R.id.Spays);
         this.etMenu = (EditText) vPost.findViewById(R.id.ETmenu);
@@ -95,11 +96,14 @@ public class PostAnnounceFragment extends Fragment {
         this.etBrief = (EditText) vPost.findViewById(R.id.ETnotes);
         this.cbPets = (CheckBox) vPost.findViewById(R.id.CBpets);
 
+
         this.initListComponant();
 
         //Add item to spinners
         this.initSpinner();
 
+
+        this.initCityAutoComplete();
         this.initAgeEditText();
 
         this.bConfirm.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +150,42 @@ public class PostAnnounceFragment extends Fragment {
     }
 
     /**
-     * Initialisation du champ pour l'age de l'utilisateur
+     *On met en place un Autocomplete adapter pour pouvoir recuperer les villes existante pour eviter les doublons en db
+     */
+    private void initCityAutoComplete() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_dropdown_item_1line, this.getCities());
+
+        etCity.setAdapter(adapter);
+
+    }
+
+    /**
+     * on recupère le nom des villes existante en database
+     * @return List<String> nom des villes
+     */
+    private List<String> getCities() {
+        List<Ville> villes = null;
+        List<String> nomVilles = new ArrayList<>();
+
+        this.databaseHelper = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
+
+        try {
+            villes = databaseHelper.getVillesDao().queryForAll();
+        } catch (SQLException e) {
+            Log.e("PostAnnounceFragment", "Fail to get All cities : " + e);
+        }
+        if (villes != null) {
+            for (Ville v : villes) {
+                nomVilles.add(v.getNom());
+            }
+        }
+
+        return  nomVilles;
+    }
+
+
+    /**
+     * Initialisation du champ pour la tranche d'age des convives
      */
     private void initAgeEditText() {
         this.etAge.addTextChangedListener(new TextWatcher() {
@@ -367,6 +406,7 @@ public class PostAnnounceFragment extends Fragment {
 
             //on met tout dans la database
             return this.insertAction(creationOffre, titre, price, nbPlace, duration, dateRepas, city, cp, street, pays, typeCuisine, brief, menu, ageMin, ageMax, pets);
+
         } else {
             Toast.makeText(this.getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
             return false;
@@ -381,17 +421,26 @@ public class PostAnnounceFragment extends Fragment {
         //On récupère le pays
         Pays objetPays = this.getPays(pays);
         if (objetPays == null) return false;
-        Log.d("PostAnnounceFragment",objetPays.toString());
+        Log.d("PostAnnounceFragment", objetPays.toString());
 
         //On récupère le Type de cuisine
         TypeCuisine objetTypeCusine = this.getTypeCuisine(typeCuisine);
         if (objetTypeCusine == null) return false;
 
         //on crée les objets !
-        Ville objetVille = new Ville(city, cp, objetPays);
+        Ville objetVille = null ;
+
+        // recherche la ville en db
+       objetVille = this.getVille(city);
+
+        // si aucune ville existant en db on créer la ville
+         if(objetVille == null) {
+             objetVille = new Ville(city, cp, objetPays);
+         }
+
         Adresse objetAdresse = new Adresse(street, objetVille);
         //on crée l' offre
-        Log.d("PostAnnounceFragment",objetAdresse.toString());
+        Log.d("PostAnnounceFragment", objetAdresse.toString());
         Offre objetOffre = null;
         try {
 
@@ -405,6 +454,29 @@ public class PostAnnounceFragment extends Fragment {
             return false;
         }
         return true;
+    }
+
+
+    private Ville getVille(String city) {
+
+        Ville objetVille = null ;
+
+        List<Ville> listVille = null;
+        try {
+            listVille = databaseHelper.getVillesDao().queryBuilder().where().eq("nom", city).query();
+        } catch (SQLException e) {
+            Log.e("PostAnnouceFragement", "Echec getting pays from database : " + e);
+            return null;
+        }
+        if (listVille != null && listVille.size() == 1) {
+            objetVille= listVille.get(0);
+        } else {
+            Log.e("PostannouceFragment", "Echec find pays, no tuple on multiple possibility, city will be created");
+            return null;
+        }
+
+
+        return objetVille;
     }
 
 
@@ -452,7 +524,7 @@ public class PostAnnounceFragment extends Fragment {
         return objetTypeCusine;
     }
 
-	// Création de la dialog pour selectionner la date
+    // Création de la dialog pour selectionner la date
     protected void CreateDialog(int id) {
         DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int selectedYear,
