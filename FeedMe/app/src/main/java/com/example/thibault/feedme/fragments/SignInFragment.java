@@ -122,7 +122,7 @@ public class SignInFragment extends Fragment {
 
                 } else {
                     etEmail.setBackgroundColor(Color.RED);
-                   // Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getActivity(), R.string.notanemail, Toast.LENGTH_SHORT).show();
                     bValidate.setEnabled(false);
                 }
             }
@@ -209,7 +209,7 @@ public class SignInFragment extends Fragment {
         }
     }
 
-	//Ici encore on vous laisse le choix dans la date.
+    //Ici encore on vous laisse le choix dans la date.
     protected void CreateDialog(int id) {
         DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int selectedYear,
@@ -217,10 +217,20 @@ public class SignInFragment extends Fragment {
                 etBirthDate.setText(selectedDay + " / " + (selectedMonth + 1) + " / "
                         + selectedYear);
 
-                calendar.set(selectedYear,selectedMonth,selectedDay);
+                calendar.set(selectedYear, selectedMonth, selectedDay);
             }
         };
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), datePickerListener, this.year, this.month, this.day);
+        Calendar cal = Calendar.getInstance();
+        //29 février Tadammm
+        if (cal.get(Calendar.MONTH) == Calendar.FEBRUARY && cal.get(Calendar.DAY_OF_MONTH) == 29) {
+            cal.set(Calendar.MONTH, Calendar.MARCH);
+            cal.set(Calendar.DAY_OF_MONTH, 1);
+        }
+        cal.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR) - 18);
+
+        datePickerDialog.getDatePicker().setMaxDate(cal.getTimeInMillis());
+        Log.d("SignInFragment", "" + datePickerDialog.getDatePicker().getMaxDate());
         datePickerDialog.show();
     }
 }

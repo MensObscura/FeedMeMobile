@@ -2,6 +2,7 @@ package com.example.thibault.feedme.fragments;
 
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.thibault.feedme.Persistence.Adresse;
@@ -38,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 
@@ -65,6 +69,8 @@ public class PostAnnounceFragment extends Fragment {
     private int day;
     private int month;
     private int year;
+    private int hour;
+    private int min;
 
     private List<EditText> neededComponants;
 
@@ -132,7 +138,8 @@ public class PostAnnounceFragment extends Fragment {
         View.OnClickListener onDateEntryClick = new View.OnClickListener() {
             public void onClick(View v) {
                 // Open a date piker
-                CreateDialog(0);
+                CreateHourDialog(0);
+                CreateDateDialog(0);
             }
         };
 
@@ -377,6 +384,7 @@ public class PostAnnounceFragment extends Fragment {
         if (this.formWellFill()) {
             this.databaseHelper = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
+
             //On récupère toutes les données
             String titre = this.etTitle.getText().toString();
             Integer nbPlace = Integer.parseInt(this.etNbPlaces.getText().toString());
@@ -385,7 +393,7 @@ public class PostAnnounceFragment extends Fragment {
             String city = this.etCity.getText().toString();
             String cp = this.etCodePostal.getText().toString();
             String pays = this.sPays.getSelectedItem().toString();
-            Date dateRepas = this.calendar.getTime();
+            Date dateRepas = calendar.getTime();
             Date creationOffre = Calendar.getInstance().getTime();
             String menu = this.etMenu.getText().toString();
             String typeCuisine = this.sType.getSelectedItem().toString();
@@ -525,19 +533,32 @@ public class PostAnnounceFragment extends Fragment {
     }
 
     // Création de la dialog pour selectionner la date
-    protected void CreateDialog(int id) {
+    protected void CreateDateDialog(int id) {
         DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int selectedYear,
                                   int selectedMonth, int selectedDay) {
                 etDate.setText(selectedDay + " / " + (selectedMonth + 1) + " / "
                         + selectedYear);
 
-                calendar.set(selectedYear, selectedMonth, selectedDay);
+
             }
         };
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), datePickerListener, year, month, day);
-
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), datePickerListener, this.year, this.month, this.day);
+        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis() + DateUtils.DAY_IN_MILLIS);
         datePickerDialog.show();
     }
+    // Création de la dialog pour selectionner l'heure
+    protected void CreateHourDialog(int id) {
+        TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                etDate.setText(etDate.getText() + " - " + hourOfDay + ":"+minute);
+                calendar.set(year, month, day, hourOfDay, minute);
+            }
+        };
+        TimePickerDialog timePickerDialog= new TimePickerDialog(getActivity(), timePickerListener, this.hour, this.min, true);
+        timePickerDialog.updateTime(Calendar.getInstance().get(Calendar.HOUR_OF_DAY),Calendar.getInstance().get(Calendar.MINUTE));
+        timePickerDialog.show();
 
+    }
 }
