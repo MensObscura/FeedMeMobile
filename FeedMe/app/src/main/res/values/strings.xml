@@ -68,4 +68,5 @@
     <string name="no">Non</string>
     <string name="mustbeInferiorOrEqual">Le champ doit être inférieur ou egal au nombre de place restantes</string>
     <string name="exampleMail">example@mail.com</string>
+    <string name="nothing">Aucune offre à ce jour</string>
 </resources>

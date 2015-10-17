@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.example.thibault.feedme.R;
 import com.example.thibault.feedme.adapters.ListAnnounceAdapter;
@@ -25,6 +26,7 @@ import com.example.thibault.feedme.adapters.ListAnnounceAdapter;
 public class ListAnnounceFragment extends Fragment {
 
     GridView announces;
+    TextView text;
     private FragmentManager manager;
     private FragmentTransaction transaction;
 
@@ -35,7 +37,13 @@ public class ListAnnounceFragment extends Fragment {
         View fList = inflater.inflate(R.layout.fragment_list_announce, container, false);
 
         announces = (GridView) fList.findViewById(R.id.gridAnnounce);
-        announces.setAdapter(new ListAnnounceAdapter(getActivity()));
+        ListAnnounceAdapter adapter = new ListAnnounceAdapter(getActivity());
+        if(adapter.getCount() == 0){
+            this.text = (TextView) fList.findViewById(R.id.TVvoidList);
+            this.text.setVisibility(View.VISIBLE);
+            this.announces.setVisibility(View.GONE);
+        }
+        announces.setAdapter(adapter);
 
         announces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
