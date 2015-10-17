@@ -70,6 +70,8 @@ public class PostAnnounceFragment extends Fragment {
     private FragmentManager manager;
     private FragmentTransaction transaction;
 
+    private FeedMeOpenDatabaseHelper databaseHelper;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -228,7 +230,7 @@ public class PostAnnounceFragment extends Fragment {
                 for (TypeCuisine t : typeCuisines) {
                     list.add(t.getTypeCuisine());
                 }
-                adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, list);
+                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             } else {
                 Log.e("PostAnnouceFragment", "TypeCuisine List is empty");
@@ -275,7 +277,7 @@ public class PostAnnounceFragment extends Fragment {
                 for (Pays p : pays) {
                     list.add(p.getNom());
                 }
-                adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, list);
+                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             } else {
                 Log.e("PostAnnouceFragment", "Country List is empty");
@@ -301,6 +303,7 @@ public class PostAnnounceFragment extends Fragment {
 
     /**
      * Verifie que l'utilisateur a bien choisi une valeur dans les spinners (Pays et TypeCuisine)
+     *
      * @return True si la valeur des spinners a bien ete choisie
      */
     public boolean formWellFill() {
@@ -328,11 +331,12 @@ public class PostAnnounceFragment extends Fragment {
 
     /**
      * Creation d'une nouvelle offre en base
+     *
      * @return True si toutes les donnees ont ete inserees dans les tables, False sinon
      */
     private boolean insertOffreInDatabase() {
         if (this.formWellFill()) {
-            FeedMeOpenDatabaseHelper databaseHelper = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
+            this.databaseHelper = FeedMeOpenDatabaseHelper.getHelper(this.getActivity());
 
             //On récupère toutes les données
             String titre = this.etTitle.getText().toString();
@@ -361,62 +365,91 @@ public class PostAnnounceFragment extends Fragment {
             String brief = this.etBrief.getText().toString();
             boolean pets = this.cbPets.isChecked();
 
-
-            //On récupère le pays
-            Pays objetPays = null;
-
-            List<Pays> listPays = null;
-            try {
-                listPays = databaseHelper.getPaysDao().queryBuilder().where().eq("nom", pays).query();
-            } catch (SQLException e) {
-                Log.e("PostAnnouceFragement", "Echec getting pays from database : " + e);
-                return false;
-            }
-            if (listPays != null && listPays.size() == 1) {
-                objetPays = listPays.get(0);
-            } else {
-                Toast.makeText(this.getActivity(), R.string.paysnotfound, Toast.LENGTH_SHORT).show();
-                Log.e("PostannouceFragment", "Echec find pays, no tuple on multiple possibility");
-                return false;
-            }
-
-            //On récupère le Type de cuisine
-            TypeCuisine objetTypeCusine = null;
-
-            List<TypeCuisine> listTypeCuisine = null;
-            try {
-                listTypeCuisine = databaseHelper.getTypeCuisinesDao().queryBuilder().where().eq("typeCuisine", typeCuisine).query();
-            } catch (SQLException e) {
-                Log.e("PostAnnouceFragement", "Echec getting Type cuisine from database: " + e);
-                return false;
-            }
-            if (listTypeCuisine != null && listTypeCuisine.size() == 1) {
-                objetTypeCusine = listTypeCuisine.get(0);
-            } else {
-                Toast.makeText(this.getActivity(), R.string.typecuisinenotfound, Toast.LENGTH_SHORT).show();
-                Log.e("PostannouceFragment", "Echec find Type cuisine, no tuple on multiple possibility");
-                return false;
-            }
-
-            //on crée les objets !
-            Ville objetVille = new Ville(city, cp, objetPays);
-            Adresse objetAdresse = new Adresse(street, objetVille);
-
-            try {
-                Offre objetOffre = new Offre(creationOffre, titre, price, nbPlace, duration, dateRepas, objetAdresse, brief, menu, ageMin, ageMax, pets, objetTypeCusine, ((MainActivity) this.getActivity()).getCurrentUser());
-
-                //On insert tout dans la database
-                databaseHelper.getOffresDao().create(objetOffre);
-                Log.d("PostAnnounceFragment", objetOffre.toString());
-            } catch (SQLException e) {
-                Log.e("PostAnnouceFragment", "Echec inserting offre in database : " + e);
-                return false;
-            }
-            return true;
+            //on met tout dans la database
+            return this.insertAction(creationOffre, titre, price, nbPlace, duration, dateRepas, city, cp, street, pays, typeCuisine, brief, menu, ageMin, ageMax, pets);
         } else {
             Toast.makeText(this.getActivity(), R.string.champVide, Toast.LENGTH_SHORT).show();
             return false;
         }
+
+
+    }
+
+    private boolean insertAction(Date creationOffre, String titre, Integer price, Integer nbPlace, Integer duration, Date dateRepas, String city, String cp, String street, String pays, String typeCuisine, String brief, String menu, Integer ageMin, Integer ageMax, boolean pets) {
+
+
+        //On récupère le pays
+        Pays objetPays = this.getPays(pays);
+        if (objetPays == null) return false;
+        Log.d("PostAnnounceFragment",objetPays.toString());
+
+        //On récupère le Type de cuisine
+        TypeCuisine objetTypeCusine = this.getTypeCuisine(typeCuisine);
+        if (objetTypeCusine == null) return false;
+
+        //on crée les objets !
+        Ville objetVille = new Ville(city, cp, objetPays);
+        Adresse objetAdresse = new Adresse(street, objetVille);
+        //on crée l' offre
+        Log.d("PostAnnounceFragment",objetAdresse.toString());
+        Offre objetOffre = null;
+        try {
+
+
+            objetOffre = new Offre(creationOffre, titre, price, nbPlace, duration, dateRepas, objetAdresse, brief, menu, ageMin, ageMax, pets, objetTypeCusine, ((MainActivity) this.getActivity()).getCurrentUser());
+            //On insert tout dans la database
+            databaseHelper.getOffresDao().create(objetOffre);
+            Log.d("PostAnnounceFragment", objetOffre.toString());
+        } catch (SQLException e) {
+            Log.e("PostAnnouceFragment", "Echec inserting offre in database : " + e);
+            return false;
+        }
+        return true;
+    }
+
+
+    private Pays getPays(String pays) {
+        //On récupère le pays
+        Pays objetPays = null;
+
+        List<Pays> listPays = null;
+        try {
+            listPays = databaseHelper.getPaysDao().queryBuilder().where().eq("nom", pays).query();
+        } catch (SQLException e) {
+            Log.e("PostAnnouceFragement", "Echec getting pays from database : " + e);
+            return null;
+        }
+        if (listPays != null && listPays.size() == 1) {
+            objetPays = listPays.get(0);
+        } else {
+            Toast.makeText(this.getActivity(), R.string.paysnotfound, Toast.LENGTH_SHORT).show();
+            Log.e("PostannouceFragment", "Echec find pays, no tuple on multiple possibility");
+            return null;
+        }
+
+        return objetPays;
+    }
+
+    private TypeCuisine getTypeCuisine(String typeCuisine) {
+
+        //On récupère le Type de cuisine
+        TypeCuisine objetTypeCusine = null;
+
+        List<TypeCuisine> listTypeCuisine = null;
+        try {
+            listTypeCuisine = databaseHelper.getTypeCuisinesDao().queryBuilder().where().eq("typeCuisine", typeCuisine).query();
+        } catch (SQLException e) {
+            Log.e("PostAnnouceFragement", "Echec getting Type cuisine from database: " + e);
+            return null;
+        }
+        if (listTypeCuisine != null && listTypeCuisine.size() == 1) {
+            objetTypeCusine = listTypeCuisine.get(0);
+        } else {
+            Toast.makeText(this.getActivity(), R.string.typecuisinenotfound, Toast.LENGTH_SHORT).show();
+            Log.e("PostannouceFragment", "Echec find Type cuisine, no tuple on multiple possibility");
+            return null;
+        }
+        return objetTypeCusine;
     }
 
 

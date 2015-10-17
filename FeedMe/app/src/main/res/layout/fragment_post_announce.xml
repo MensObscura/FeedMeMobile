@@ -200,8 +200,9 @@
 
                 <Spinner
                     android:id="@+id/Spays"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textColor="#000000"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -297,7 +298,7 @@
 
             <Spinner
                 android:id="@+id/Stype"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp" />
         </LinearLayout>
 
