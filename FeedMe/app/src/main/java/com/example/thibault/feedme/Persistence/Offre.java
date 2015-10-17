@@ -26,7 +26,7 @@ public class Offre {
     Integer durée;
     @DatabaseField(canBeNull = false)
     Date dateRepas;
-    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true, foreignAutoCreate = true)
+    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true, foreignAutoCreate = true, maxForeignAutoRefreshLevel=3)
     Adresse idAdress;
     @DatabaseField
     String notes;
