@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.example.thibault.feedme.MyOnClickListener;
 import com.example.thibault.feedme.R;
@@ -18,8 +17,7 @@ import com.example.thibault.feedme.fragments.HomeLoginFragment;
 public class HomeLoginActivity extends FragmentActivity implements MyOnClickListener {
 
     private static final String EXTRA_MESSAGE = "com.example.thibault.feedme";
-    private Button bLogin;
-    private Button bSignIn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
