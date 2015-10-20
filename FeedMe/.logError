@@ -3,3 +3,5 @@ bash: gnome-screensaver : commande introuvable
 ** (gnome-screensaver:18100): WARNING **: l'économiseur d'écran est déjà en cours de fonctionnement pour cette session
 
 ** (gnome-screensaver:7983): WARNING **: l'économiseur d'écran est déjà en cours de fonctionnement pour cette session
+
+** (gnome-screensaver:8333): WARNING **: l'économiseur d'écran est déjà en cours de fonctionnement pour cette session

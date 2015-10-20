@@ -1,6 +1,7 @@
 package com.example.thibault.feedme.fragments;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,9 @@ import com.example.thibault.feedme.Persistence.Offre;
 import com.example.thibault.feedme.Persistence.Particulier;
 import com.example.thibault.feedme.Persistence.Reservation;
 import com.example.thibault.feedme.R;
+import com.example.thibault.feedme.activities.HomeLoginActivity;
 import com.example.thibault.feedme.activities.MainActivity;
+import com.example.thibault.feedme.activities.MapsActivity;
 import com.example.thibault.feedme.databaseHelpers.FeedMeOpenDatabaseHelper;
 
 import java.sql.SQLException;
@@ -44,6 +48,7 @@ public class BookAnnounceFragment extends Fragment {
     private TextView tvBrief;
     private TextView tvTotalPlaces;
     private EditText etBookPlace;
+    private ImageButton ibMap;
 
     private Offre currentOffre;
 
@@ -66,7 +71,21 @@ public class BookAnnounceFragment extends Fragment {
 
         //Verification des champs et ajout dans database
         this.bConfirm.setOnClickListener(this.createFormOnClickListener());
+        this.ibMap.setOnClickListener(this.createMapOnClickListener());
         return vBook;
+    }
+
+    private View.OnClickListener createMapOnClickListener() {
+
+        View.OnClickListener mapOnclick =new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), MapsActivity.class);
+                startActivity(i);
+            }
+        };
+                return mapOnclick;
     }
 
     private View.OnClickListener createFormOnClickListener() {
@@ -129,6 +148,7 @@ public class BookAnnounceFragment extends Fragment {
     //on init les composant
     private void initComponants(View vBook) {
 
+        this.ibMap = (ImageButton) vBook.findViewById(R.id.IBMap);
         this.bConfirm = (Button) vBook.findViewById(R.id.Bconfirm_book);
         this.tvTitle = (TextView) vBook.findViewById(R.id.TVtitle);
         this.tvNameAuthor = (TextView) vBook.findViewById(R.id.TVname_author);
