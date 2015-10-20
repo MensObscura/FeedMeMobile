@@ -114,14 +114,13 @@ public class SignInFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                boolean valid = Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$", s);
+                boolean valid = Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$",s);
 
-                if (valid) {
-                    etEmail.setHintTextColor(Color.BLACK);
+                if(valid){
+                    etEmail.setTextColor(Color.BLACK);
                     bValidate.setEnabled(true);
-
-                } else {
-                    etEmail.setHintTextColor(Color.RED);
+                }else{
+                    etEmail.setTextColor(Color.RED);
                     bValidate.setEnabled(false);
                 }
             }
