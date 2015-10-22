@@ -82,6 +82,8 @@ public class BookAnnounceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), MapsActivity.class);
+                String message = tvAddress.getText().toString();
+                i.putExtra("ADDRESS", message);
                 startActivity(i);
             }
         };

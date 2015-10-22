@@ -1,23 +1,36 @@
 package com.example.thibault.feedme.activities;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.thibault.feedme.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private String adresse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        this.adresse = this.getIntent().getStringExtra("ADDRESS");
+
         setUpMapIfNeeded();
+
     }
 
     @Override
@@ -49,7 +62,12 @@ public class MapsActivity extends FragmentActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                setUpMap();
+                try {
+                    setUpMap();
+                } catch (IOException e) {
+                    Log.e("MapsActivity","Faild to load adress : "+ this.adresse);
+
+                }
             }
         }
     }
@@ -60,7 +78,31 @@ public class MapsActivity extends FragmentActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    private void setUpMap() throws IOException {
+
+
+        Geocoder geocoder = new Geocoder(this);
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocationName(this.adresse, 1);
+        }catch (Exception e){
+            Log.e("MapsActivity","Error at location : "+ e);
+        }
+        Log.d("MapsActivity",this.adresse);
+        if(addresses != null)
+        if(addresses.size() > 0) {
+
+            for(Address a : addresses){
+                Log.d("MapsActivity","done");
+                double latitude= a.getLatitude();
+                double longitude= a.getLongitude();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(this.adresse+" (1)"));
+                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15.0f) );
+            }
+
+        }
+
+
+
     }
 }
