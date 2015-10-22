@@ -5,6 +5,7 @@ import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.thibault.feedme.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -89,17 +90,23 @@ public class MapsActivity extends FragmentActivity {
             Log.e("MapsActivity","Error at location : "+ e);
         }
         Log.d("MapsActivity",this.adresse);
-        if(addresses != null)
-        if(addresses.size() > 0) {
+        Log.d("MapsActivity",addresses.size()+"");
+        if(addresses != null) {
+            if (addresses.size() > 0) {
 
-            for(Address a : addresses){
-                Log.d("MapsActivity","done");
-                double latitude= a.getLatitude();
-                double longitude= a.getLongitude();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(this.adresse+" (1)"));
-                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15.0f) );
+                for (Address a : addresses) {
+                    Log.d("MapsActivity", "done");
+                    double latitude = a.getLatitude();
+                    double longitude = a.getLongitude();
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(this.adresse + " (1)"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15.0f));
+                }
+
+            }else {
+                Toast.makeText(this,R.string.addressnotfound,Toast.LENGTH_SHORT).show();
             }
-
+        }else {
+            Toast.makeText(this,R.string.addressnotfound,Toast.LENGTH_SHORT).show();
         }
 
 

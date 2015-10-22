@@ -70,4 +70,5 @@
     <string name="exampleMail">example@mail.com</string>
     <string name="nothing">Aucune offre à ce jour</string>
     <string name="title_activity_maps">Map</string>
+    <string name="addressnotfound">Imposible de localiser cette adresse</string>
 </resources>
